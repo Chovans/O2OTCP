@@ -1,0 +1,702 @@
+2015-07-16 10:34:59,985-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:35:00,050-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:35:02,119-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a159h071zsfc0e|5c69a44f, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a159h071zsfc0e|5c69a44f, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:35:03,938-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:35:03,940-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:35:03,943-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:35:03,953-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(40) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id))
+2015-07-16 10:35:03,953-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:35:04,643-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.springframework.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notifyController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.service.wx.NotifyService com.dotnar.controller.wx.NotifyController.notifyService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notifyService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.dao.WXPayRecordRepository com.dotnar.service.wx.NotifyService.wxPayRecordRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationid found for type WXPayRecord!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4729)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5167)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:725)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:701)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1648)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:463)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:413)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1466)
+	at javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.java:76)
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1307)
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1399)
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:828)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:323)
+	at sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:568)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:826)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$254(TCPTransport.java:683)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler$$Lambda$1/2129486415.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:682)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.service.wx.NotifyService com.dotnar.controller.wx.NotifyController.notifyService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notifyService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.dao.WXPayRecordRepository com.dotnar.service.wx.NotifyService.wxPayRecordRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationid found for type WXPayRecord!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 59 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notifyService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.dao.WXPayRecordRepository com.dotnar.service.wx.NotifyService.wxPayRecordRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationid found for type WXPayRecord!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	... 61 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.dao.WXPayRecordRepository com.dotnar.service.wx.NotifyService.wxPayRecordRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationid found for type WXPayRecord!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 72 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationid found for type WXPayRecord!
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	... 74 more
+Caused by: org.springframework.data.mapping.PropertyReferenceException: No property transationid found for type WXPayRecord!
+	at org.springframework.data.mapping.PropertyPath.<init>(PropertyPath.java:75)
+	at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:327)
+	at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:307)
+	at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:270)
+	at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:241)
+	at org.springframework.data.repository.query.parser.Part.<init>(Part.java:76)
+	at org.springframework.data.repository.query.parser.PartTree$OrPart.<init>(PartTree.java:235)
+	at org.springframework.data.repository.query.parser.PartTree$Predicate.buildTree(PartTree.java:373)
+	at org.springframework.data.repository.query.parser.PartTree$Predicate.<init>(PartTree.java:353)
+	at org.springframework.data.repository.query.parser.PartTree.<init>(PartTree.java:87)
+	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:60)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:104)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:204)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:80)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.<init>(RepositoryFactorySupport.java:357)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:192)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.initAndReturn(RepositoryFactoryBeanSupport.java:239)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:225)
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:92)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 84 more
+2015-07-16 10:35:58,106-[HL] INFO RMI TCP Connection(4)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:35:58,155-[HL] INFO RMI TCP Connection(4)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:36:00,275-[HL] INFO RMI TCP Connection(4)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a159i9151tb235p|1e26c226, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a159i9151tb235p|1e26c226, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:36:01,911-[HL] INFO RMI TCP Connection(4)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:36:01,913-[HL] INFO RMI TCP Connection(4)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:36:01,915-[HL] INFO RMI TCP Connection(4)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:36:01,924-[HL] ERROR RMI TCP Connection(4)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(40) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id))
+2015-07-16 10:36:01,924-[HL] ERROR RMI TCP Connection(4)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:36:02,439-[HL] ERROR RMI TCP Connection(4)-127.0.0.1 org.springframework.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notifyController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.service.wx.NotifyService com.dotnar.controller.wx.NotifyController.notifyService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notifyService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.dao.WXPayRecordRepository com.dotnar.service.wx.NotifyService.wxPayRecordRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationId found for type WXPayRecord!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4729)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5167)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:725)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:701)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1648)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:463)
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:413)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:300)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1466)
+	at javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.java:76)
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1307)
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1399)
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:828)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:323)
+	at sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:568)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:826)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$254(TCPTransport.java:683)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler$$Lambda$1/1730283466.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:682)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.service.wx.NotifyService com.dotnar.controller.wx.NotifyController.notifyService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notifyService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.dao.WXPayRecordRepository com.dotnar.service.wx.NotifyService.wxPayRecordRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationId found for type WXPayRecord!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 59 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notifyService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.dao.WXPayRecordRepository com.dotnar.service.wx.NotifyService.wxPayRecordRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationId found for type WXPayRecord!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	... 61 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.dotnar.dao.WXPayRecordRepository com.dotnar.service.wx.NotifyService.wxPayRecordRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationId found for type WXPayRecord!
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 72 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'WXPayRecordRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property transationId found for type WXPayRecord!
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	... 74 more
+Caused by: org.springframework.data.mapping.PropertyReferenceException: No property transationId found for type WXPayRecord!
+	at org.springframework.data.mapping.PropertyPath.<init>(PropertyPath.java:75)
+	at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:327)
+	at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:307)
+	at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:270)
+	at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:241)
+	at org.springframework.data.repository.query.parser.Part.<init>(Part.java:76)
+	at org.springframework.data.repository.query.parser.PartTree$OrPart.<init>(PartTree.java:235)
+	at org.springframework.data.repository.query.parser.PartTree$Predicate.buildTree(PartTree.java:373)
+	at org.springframework.data.repository.query.parser.PartTree$Predicate.<init>(PartTree.java:353)
+	at org.springframework.data.repository.query.parser.PartTree.<init>(PartTree.java:87)
+	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:60)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:104)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:204)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:80)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.<init>(RepositoryFactorySupport.java:357)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:192)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.initAndReturn(RepositoryFactoryBeanSupport.java:239)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:225)
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:92)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 84 more
+2015-07-16 10:39:29,080-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:39:29,132-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:39:31,094-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a159mrtm19vt5cs|6f764ef8, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a159mrtm19vt5cs|6f764ef8, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:39:32,915-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:39:32,918-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:39:32,919-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:39:32,928-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(40) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id))
+2015-07-16 10:39:32,928-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:39:48,061-[HL] ERROR pool-2-thread-1 org.hibernate.engine.jdbc.spi.SqlExceptionHelper - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key, mch_id, open_id, out_trade_no, result_code, reurn_msg, time_end, total_fee,' at line 1
+2015-07-16 10:41:02,005-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:41:02,047-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:41:03,925-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a159orinwku5cz|65804425, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a159orinwku5cz|65804425, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:41:05,618-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: create table wxpay_record (id varchar(40) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id))
+2015-07-16 10:41:05,618-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaExport - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:44:31,593-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:44:31,656-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:44:33,707-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a159t98w1tndsba|19920019, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a159t98w1tndsba|19920019, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:44:35,596-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:44:35,599-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:44:35,600-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:44:35,611-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(40) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id)) ENGINE=InnoDB
+2015-07-16 10:44:35,611-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:46:20,116-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:46:20,173-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:46:22,158-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a159vkzddkrk3m|77583f92, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a159vkzddkrk3m|77583f92, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:46:23,958-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:46:23,961-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:46:23,962-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:46:23,972-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(50) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id)) ENGINE=InnoDB
+2015-07-16 10:46:23,972-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:50:25,840-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:50:26,083-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:50:34,006-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a15a0uo6fe43hb|62318361, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a15a0uo6fe43hb|62318361, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:50:36,805-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:50:36,807-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:50:36,808-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:50:36,816-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(50) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id)) type=InnoDB
+2015-07-16 10:50:36,816-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:51:23,042-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:51:23,101-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:51:25,422-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a15a22q01wd25jc|45a3cc7, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a15a22q01wd25jc|45a3cc7, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:51:27,218-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:51:27,221-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:51:27,222-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:51:27,232-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(50) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id))
+2015-07-16 10:51:27,232-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:54:10,045-[HL] INFO RMI TCP Connection(3)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:54:10,095-[HL] INFO RMI TCP Connection(3)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:54:12,760-[HL] INFO RMI TCP Connection(3)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a15a5nksay9301|3e5a0f8e, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a15a5nksay9301|3e5a0f8e, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:54:14,440-[HL] INFO RMI TCP Connection(3)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:54:14,444-[HL] INFO RMI TCP Connection(3)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:54:14,445-[HL] INFO RMI TCP Connection(3)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:54:14,455-[HL] ERROR RMI TCP Connection(3)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(50) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id))
+2015-07-16 10:54:14,455-[HL] ERROR RMI TCP Connection(3)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:56:15,860-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:56:15,914-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:56:17,851-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a15a8cnt23cg9h|1bf93ffe, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a15a8cnt23cg9h|1bf93ffe, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:56:20,123-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:56:20,128-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:56:20,130-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:56:20,141-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000388: Unsuccessful: create table wxpay_record (id varchar(50) not null, err_code varchar(255), err_code_des varchar(255), is_receive bit, is_send bit, key varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(255), result_code varchar(255), reurn_msg varchar(255), time_end varchar(255), total_fee varchar(255), transaction_id varchar(255), primary key (id))
+2015-07-16 10:56:20,141-[HL] ERROR RMI TCP Connection(2)-127.0.0.1 org.hibernate.tool.hbm2ddl.SchemaUpdate - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(255), mch_id varchar(255), open_id varchar(255), out_trade_no varchar(25' at line 1
+2015-07-16 10:59:55,662-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 10:59:55,722-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 10:59:57,889-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a15ad29i1yzbcf2|6f1f5e1a, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a15ad29i1yzbcf2|6f1f5e1a, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 10:59:59,898-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:59:59,901-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 10:59:59,903-[HL] INFO RMI TCP Connection(2)-127.0.0.1 java.sql.DatabaseMetaData - HHH000262: Table not found: wxpay_record
+2015-07-16 11:00:20,481-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 11:00:20,484-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>68kbnareo3vgb0y0gj4rm65cspdsx2n9</nonce_str>
+    <sign><![CDATA[34835781BEB32A3FF51957F383388C12]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>02135880-202f-4c6d-8391-c0bef1</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716110019</time_start>
+    <time_expire>20150716111019</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url></notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>89d36d24-a68f-4152-9d08-1b61b8</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 11:00:20,503-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 11:00:26,106-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - {return_msg=invalid notify_url, return_code=FAIL}
+2015-07-16 11:03:01,088-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 11:03:01,089-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>icwrqctn2p1jguqqgyi667e12syi4iqb</nonce_str>
+    <sign><![CDATA[0720A9F17A2507C891BAE832E6C6FBA0]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>5566dcd5-48c1-4388-a62c-8bf858</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716110301</time_start>
+    <time_expire>20150716111301</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url></notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>eed91769-5cf9-41ae-8f73-d6c638</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 11:03:01,089-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 11:05:11,785-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - {return_msg=invalid notify_url, return_code=FAIL}
+2015-07-16 11:06:27,760-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.log.MLog - MLog clients using log4j logging.
+2015-07-16 11:06:27,809-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.C3P0Registry - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2015-07-16 11:06:30,069-[HL] INFO RMI TCP Connection(2)-127.0.0.1 com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> true, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1389a15algsv1uzoaiz|34aa2a02, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1389a15algsv1uzoaiz|34aa2a02, idleConnectionTestPeriod -> 60, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://localhost:3306/o2o?useUnicode=true&amp;characterEncoding=utf-8, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 1800, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 1000, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2015-07-16 11:07:17,753-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 11:07:17,755-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>zus3byv9tjy7dyphixk3li5tn3s59m65</nonce_str>
+    <sign><![CDATA[D8BF260A8A15AA821284BAE14584530B]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>a9f75e2e-f946-4f9b-bb26-a45bde</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716110717</time_start>
+    <time_expire>20150716111717</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>3c440a2e-613f-4949-9535-67eb4f</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 11:07:17,771-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 11:07:23,577-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - {nonce_str=abmr3PpVMveO3P8v, appid=wxcf74f930098faee1, sign=4320F062C992CD2EA4E687A744EB76B3, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx20150716110723f1d3c7f5420173406921}
+2015-07-16 11:07:23,577-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - 服务器回包里面的签名是:4320F062C992CD2EA4E687A744EB76B3
+2015-07-16 11:07:23,577-[HL] INFO pool-2-thread-1 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 11:07:23,637-[HL] INFO pool-2-thread-1 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 11:13:51,954-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 11:13:51,955-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>aa3q0cr0uj96ns6gj70mipbv4qtd5hsf</nonce_str>
+    <sign><![CDATA[1439A9C9AE3DCC2DDB579D94F61F5FA3]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>d7884cf5-9507-42a2-be3d-ad8552</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716111351</time_start>
+    <time_expire>20150716112351</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>005589f6-a340-49da-96c8-ef2434</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 11:13:51,955-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 11:13:57,447-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - {nonce_str=DRTre1fYbgt1tDB4, appid=wxcf74f930098faee1, sign=37D7C19ADE1F4A98ED923B6DE73BAEF7, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx20150716111357acabd13a250350403664}
+2015-07-16 11:13:57,448-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - 服务器回包里面的签名是:37D7C19ADE1F4A98ED923B6DE73BAEF7
+2015-07-16 11:13:57,448-[HL] INFO pool-2-thread-2 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 11:13:57,450-[HL] INFO pool-2-thread-2 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 11:15:51,954-[HL] INFO pool-2-thread-3 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 11:15:51,954-[HL] INFO pool-2-thread-3 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>pseelg0aaiuwr59tirjmq70uwag2izu8</nonce_str>
+    <sign><![CDATA[B57CD18E419ED5C38CFB6543AE85C601]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>3f418b4a-4fb0-49d8-998a-2921ef</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716111551</time_start>
+    <time_expire>20150716112551</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>21e837d3-f70d-46d1-bef7-8df1af</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 11:15:51,954-[HL] INFO pool-2-thread-3 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 11:15:57,396-[HL] INFO pool-2-thread-3 com.dotnar.util.Util - {nonce_str=Ba8u7PAhd1KVfr3x, appid=wxcf74f930098faee1, sign=8EEBF1ED7B20010207C9E3FAD9C04B89, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx201507161115578d46e41e950427391686}
+2015-07-16 11:15:57,396-[HL] INFO pool-2-thread-3 com.dotnar.util.Util - 服务器回包里面的签名是:8EEBF1ED7B20010207C9E3FAD9C04B89
+2015-07-16 11:15:57,396-[HL] INFO pool-2-thread-3 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 11:15:57,398-[HL] INFO pool-2-thread-3 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 12:22:33,589-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 12:22:33,590-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>5l3gkm8y7jy0sybna5jcw2c9xfxs3eeg</nonce_str>
+    <sign><![CDATA[9FF36DEE73D57816E597C17F7811E7CF]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>69a2de48-3701-47b9-8109-f5b477</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716122233</time_start>
+    <time_expire>20150716123233</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>7ddc573b-16c4-42b9-a045-066c7c</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 12:22:33,590-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 12:22:39,037-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - {nonce_str=ogCyZePXKe5gbf2N, appid=wxcf74f930098faee1, sign=EB1F790AD6889B41DC511D52DD4097F1, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx20150716122238b32792d5e40159024666}
+2015-07-16 12:22:39,037-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - 服务器回包里面的签名是:EB1F790AD6889B41DC511D52DD4097F1
+2015-07-16 12:22:39,037-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 12:22:39,038-[HL] INFO pool-2-thread-4 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 12:23:14,368-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 12:23:14,368-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>cymophlb0qyufqmtdjojcdhr327ut0di</nonce_str>
+    <sign><![CDATA[E600B29C05EDF0CD72E534FA0425C807]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>0a8a68d3-7053-4228-a6ad-68b7c8</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716122314</time_start>
+    <time_expire>20150716123314</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>7c1f373c-7bb6-4de9-81ca-e1909b</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 12:23:14,368-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 12:23:19,784-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - {nonce_str=q3Ocna8hGDLzNe1s, appid=wxcf74f930098faee1, sign=26CA436DFC8BD34FBBCA1AFEDB668485, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx201507161223195de4e4f25c0478482362}
+2015-07-16 12:23:19,785-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - 服务器回包里面的签名是:26CA436DFC8BD34FBBCA1AFEDB668485
+2015-07-16 12:23:19,785-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 12:23:19,786-[HL] INFO pool-2-thread-4 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 12:23:37,031-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 12:23:37,031-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>r2ez9uxmy7ot60isnfv17jh014end2j3</nonce_str>
+    <sign><![CDATA[A00D45DFCE2EAA23DB308B5B3CC81296]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>efa3ffe0-d93a-488f-a138-6dade3</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716122337</time_start>
+    <time_expire>20150716123337</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>6b2c41a6-ac2d-4342-9c95-c85376</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 12:23:37,032-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 12:23:37,464-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - {nonce_str=rlXb1XAPVeOV9eH6, appid=wxcf74f930098faee1, sign=6B91C71AAACFAE8675D5100EE4BBF014, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx20150716122337c5079ad9fd0643795784}
+2015-07-16 12:23:37,465-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - 服务器回包里面的签名是:6B91C71AAACFAE8675D5100EE4BBF014
+2015-07-16 12:23:37,465-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 12:23:37,466-[HL] INFO pool-2-thread-4 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 12:23:45,110-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 12:23:45,110-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>zt2avw9go4u8zxarhpggw5i7fb29v3if</nonce_str>
+    <sign><![CDATA[161985803A5349E72E24C12AB108D4B3]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>a971ef38-ad97-4027-af1e-e92b68</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716122345</time_start>
+    <time_expire>20150716123345</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>6478dae1-4be6-48e3-8e96-ba9396</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 12:23:45,110-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 12:23:45,554-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - {nonce_str=x2mizmB9bCfGVEB5, appid=wxcf74f930098faee1, sign=0F2D3F9051B3A4C8EFC427CBF93D1DC0, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx201507161223452aec2455240258382386}
+2015-07-16 12:23:45,554-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - 服务器回包里面的签名是:0F2D3F9051B3A4C8EFC427CBF93D1DC0
+2015-07-16 12:23:45,555-[HL] INFO pool-2-thread-4 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 12:23:45,556-[HL] INFO pool-2-thread-4 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 12:26:09,221-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 12:26:09,222-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>578y0ymo6jfvesd0elpxvh7tl84uvd8y</nonce_str>
+    <sign><![CDATA[C3B4C37B495D5DEAF1EA433691D46BBB]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>006c63a9-fdd9-4f88-9550-4c6f0d</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716122609</time_start>
+    <time_expire>20150716123609</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>f9e87e0d-9fb8-4085-a1b0-3e59d4</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 12:26:09,222-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 12:26:14,639-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - {nonce_str=CvGmvHwRsLnZojwA, appid=wxcf74f930098faee1, sign=2C6AD295D30782B0DF75100DA1F10DA1, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx20150716122614837d70cf010735269578}
+2015-07-16 12:26:14,639-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - 服务器回包里面的签名是:2C6AD295D30782B0DF75100DA1F10DA1
+2015-07-16 12:26:14,640-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 12:26:14,641-[HL] INFO pool-2-thread-5 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 12:26:59,858-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 12:26:59,858-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>zl9zw6kf9u0n44pd67agcyjbm7fa0vxd</nonce_str>
+    <sign><![CDATA[150D4F92DA5E7A55CE21E3A829DD4E11]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>6b1033a6-397c-464e-810d-bfdeda</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716122659</time_start>
+    <time_expire>20150716123659</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>8d591d48-1af8-4148-a851-ded886</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 12:26:59,858-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 12:27:05,272-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - {nonce_str=i0ylxoUzyXmlCKlP, appid=wxcf74f930098faee1, sign=FE91BA8D7F98A4F46FECD1BA21AB0850, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx201507161227053c4624dcbc0720040168}
+2015-07-16 12:27:05,273-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - 服务器回包里面的签名是:FE91BA8D7F98A4F46FECD1BA21AB0850
+2015-07-16 12:27:05,273-[HL] INFO pool-2-thread-5 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 12:27:05,274-[HL] INFO pool-2-thread-5 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 12:28:15,785-[HL] INFO pool-2-thread-6 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 12:28:15,786-[HL] INFO pool-2-thread-6 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>6hwv1yu5q2yep4h0x9e9g8tj7ljm9bfi</nonce_str>
+    <sign><![CDATA[F31C2797B3B40FD2EBBEB22CAF56C49D]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>1eafe2a8-c2a7-4c4a-8925-b59518</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716122815</time_start>
+    <time_expire>20150716123815</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>b3515da5-0a24-45d5-91f8-59b20e</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 12:28:15,786-[HL] INFO pool-2-thread-6 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 12:28:21,197-[HL] INFO pool-2-thread-6 com.dotnar.util.Util - {nonce_str=hYsOWUIw9bOFGQVY, appid=wxcf74f930098faee1, sign=A26A991AD306B293741A39563B5EB6CD, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx201507161228216b856f6e1a0300580568}
+2015-07-16 12:28:21,198-[HL] INFO pool-2-thread-6 com.dotnar.util.Util - 服务器回包里面的签名是:A26A991AD306B293741A39563B5EB6CD
+2015-07-16 12:28:21,198-[HL] INFO pool-2-thread-6 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 12:28:21,199-[HL] INFO pool-2-thread-6 net.sf.json.xml.XMLSerializer - Using default type string
+2015-07-16 12:29:24,957-[HL] INFO pool-2-thread-7 com.dotnar.util.Util - API，POST过去的数据是：
+2015-07-16 12:29:24,957-[HL] INFO pool-2-thread-7 com.dotnar.util.Util - <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <appid>wxcf74f930098faee1</appid>
+    <mch_id>1233472902</mch_id>
+    <device_info></device_info>
+    <nonce_str>1090ikauopvpsik6sjt4951yj6c8e1y5</nonce_str>
+    <sign><![CDATA[3D3125BF6BCC440EF095FC466F85C043]]></sign>
+    <body><![CDATA[测试订单]]></body>
+    <detail><![CDATA[测试而已啊]]></detail>
+    <attach><![CDATA[]]></attach>
+    <out_trade_no>c9d89ed8-d9a0-4f3f-8382-e3ca90</out_trade_no>
+    <fee_type>CNY</fee_type>
+    <total_fee>1</total_fee>
+    <spbill_create_ip>127.0.0.1</spbill_create_ip>
+    <time_start>20150716122924</time_start>
+    <time_expire>20150716123924</time_expire>
+    <goods_tag>WX</goods_tag>
+    <notify_url>www.baidu.com</notify_url>
+    <trade_type>JSAPI</trade_type>
+    <product_id>34b43f41-7295-4231-905f-119f8c</product_id>
+    <openid>o_QrEjjIkQ9URa1YnZ8gWi6G2AWs</openid>
+</xml>
+
+2015-07-16 12:29:24,957-[HL] INFO pool-2-thread-7 com.dotnar.util.Util - executing requestPOST https://api.mch.weixin.qq.com/pay/unifiedorder HTTP/1.1
+2015-07-16 12:29:30,394-[HL] INFO pool-2-thread-7 com.dotnar.util.Util - {nonce_str=6oeLHTikPJpXTetj, appid=wxcf74f930098faee1, sign=DEF72ABFA6D2010E8CB5372DD7C35F0A, trade_type=JSAPI, return_msg=OK, result_code=SUCCESS, mch_id=1233472902, return_code=SUCCESS, prepay_id=wx201507161229301ffe27408b0205223206}
+2015-07-16 12:29:30,394-[HL] INFO pool-2-thread-7 com.dotnar.util.Util - 服务器回包里面的签名是:DEF72ABFA6D2010E8CB5372DD7C35F0A
+2015-07-16 12:29:30,394-[HL] INFO pool-2-thread-7 com.dotnar.util.Util - 恭喜，API返回的数据签名验证通过!!!
+2015-07-16 12:29:30,395-[HL] INFO pool-2-thread-7 net.sf.json.xml.XMLSerializer - Using default type string
