@@ -9,8 +9,7 @@ import com.dotnar.dao.UnifiedorderRepository;
 import com.dotnar.dao.UnifiedorderResultRepository;
 import com.dotnar.exception.WXPayExceptioin;
 import com.dotnar.util.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class UnifiedorderService {
     //重复通知过滤  时效60秒
     private static ExpireSet<String> expireSet = new ExpireSet<String>(60);
 
-    private static Log logger = LogFactory.getLog(UnifiedorderService.class);
+    private static Logger logger = Logger.getLogger(UnifiedorderService.class);
     private static UnifiedorderRepository unifiedorderRepository;
     private static UnifiedorderKeyRepository unifiedorderKeyRepository;
     private static UnifiedorderResultRepository unifiedorderResultRepository;
@@ -125,10 +124,15 @@ public class UnifiedorderService {
             return null;
         }
         //获取key
-        //UnifiedorderKey unifiedorderKey = unifiedorderKeyRepository.findByAppIdAndMchIdAndOutTradeNoAndOpenId(payNotify.getAppid(), payNotify.getMch_id(),
-        //        payNotify.getOut_trade_no(), payNotify.getOpenid());
+        System.out.println("==== 收到的out_trade_no:" + payNotify.getOut_trade_no());
 
-        UnifiedorderKey unifiedorderKey = unifiedorderKeyRepository.findByOutTradeNo(payNotify.getOut_trade_no());
+        UnifiedorderKey unifiedorderKey = null;
+        try{
+            unifiedorderKeyRepository.findByOutTradeNo(payNotify.getOut_trade_no());
+        }catch (Exception e){
+            return null;
+        }
+
         System.out.println("==== 验证签名 ====");
         logger.info("==== 验证签名 ====");
         //签名验证

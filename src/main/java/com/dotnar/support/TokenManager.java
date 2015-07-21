@@ -18,7 +18,7 @@ public class TokenManager{
 
 
 	/**
-	 * 初始化token 刷新，每118分钟刷新一次。
+	 * 初始化token 刷新，每20分钟刷新一次。
 	 * @param appid
 	 * @param secret
 	 */
@@ -38,7 +38,7 @@ public class TokenManager{
 				}
 				tokenMap.put(appid,token.getAccess_token());
 			}
-		},0,1000*60*118);
+		},0,1000*60*20);
 		timerMap.put(appid,timer);
 	}
 
@@ -63,7 +63,6 @@ public class TokenManager{
 	/**
 	 * 获取第一个appid 的 access_token
 	 * 适用于单一微信号
-	 * @param appid
 	 * @return
 	 */
 	public static String getDefaultToken(){

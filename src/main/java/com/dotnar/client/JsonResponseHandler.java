@@ -29,7 +29,8 @@ public class JsonResponseHandler{
 	                if (status >= 200 && status < 300) {
 	                    HttpEntity entity = response.getEntity();
 	                    String str = EntityUtils.toString(entity);
-	                    return JsonUtil.parseObject(new String(str.getBytes("iso-8859-1"),"utf-8"), clazz);
+						System.out.println("==== 从服务器获取json：" + str +" ====");
+						return JsonUtil.parseObject(new String(str.getBytes("iso-8859-1"),"utf-8"), clazz);
 	                } else {
 	                    throw new ClientProtocolException("Unexpected response status: " + status);
 	                }

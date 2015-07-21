@@ -1,19 +1,13 @@
 package com.dotnar.client;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpUriRequest;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,7 +54,8 @@ public class LocalHttpClient {
 
 	public static <T> T execute(HttpUriRequest request,ResponseHandler<T> responseHandler) throws Exception {
 		try {
-			return httpClient.execute(request, responseHandler);
+			T t = httpClient.execute(request, responseHandler);
+			return t;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());

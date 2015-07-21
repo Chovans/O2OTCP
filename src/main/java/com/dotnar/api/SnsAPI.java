@@ -1,5 +1,6 @@
 package com.dotnar.api;
 
+import com.dotnar.bean.BaseResult;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import com.dotnar.bean.SnsToken;
@@ -150,4 +151,38 @@ public class SnsAPI extends BaseAPI{
 		}
 	}
 
+	/**
+	 * 验证accessToken是否有效
+	 * @param accessToken
+	 * @param openid
+	 * @return
+	 */
+	public static BaseResult checkOauth2AccessToken(String accessToken,String openid) throws Exception {
+		HttpUriRequest httpUriRequest = RequestBuilder.post()
+				.setUri(BASE_URI + "/sns/auth")
+				.addParameter("access_token", accessToken)
+				.addParameter("openid", openid)
+				.build();
+		return LocalHttpClient.executeJsonResult(httpUriRequest,BaseResult.class);
+	}
+
+
+	/**
+	 * 刷新accessToken
+	 * @param appid
+	 * @param refreshToken
+	 * @return
+	 */
+	public static SnsToken refreshOauth2AccessToken(String appid,String refreshToken) throws Exception {
+		/**
+		 * https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
+		 */
+		HttpUriRequest httpUriRequest = RequestBuilder.post()
+				.setUri(BASE_URI + "/sns/oauth2/refresh_token")
+				.addParameter("appid", appid)
+				.addParameter("grant_type", "refresh_token")
+				.addParameter("refresh_token", refreshToken)
+				.build();
+		return LocalHttpClient.executeJsonResult(httpUriRequest,SnsToken.class);
+	}
 }

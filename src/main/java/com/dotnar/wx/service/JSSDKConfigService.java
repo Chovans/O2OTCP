@@ -11,12 +11,11 @@ import com.dotnar.support.TokenManager;
 import com.dotnar.util.JsUtil;
 import com.dotnar.util.JsonUtil;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.entity.StringEntity;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -32,7 +31,7 @@ import java.util.UUID;
 @Service
 public class JSSDKConfigService {
 
-    private static Log logger = LogFactory.getLog(JSSDKConfigService.class);
+    private static Logger logger = Logger.getLogger(JSSDKConfigService.class);
 
     /**
      * jssdk中wx的初始化参数

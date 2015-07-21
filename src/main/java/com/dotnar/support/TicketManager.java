@@ -18,7 +18,7 @@ public class TicketManager {
 
 
 	/**
-	 * 初始化ticket 刷新，每119分钟刷新一次。
+	 * 初始化ticket 刷新，每20分钟刷新一次。
 	 * 依赖TokenManager
 	 * @param appid
 	 */
@@ -42,7 +42,7 @@ public class TicketManager {
 					}
 					ticketMap.put(appid,ticket.getTicket());
 				}
-			},1000,1000*60*119);
+			},1000,1000*60*20);
 			timerMap.put(appid,timer);
 		}
 	}

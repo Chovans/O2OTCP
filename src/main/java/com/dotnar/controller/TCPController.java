@@ -4,6 +4,7 @@ import com.dotnar.contant.TCPConfig;
 import com.dotnar.service.CheckCodeService;
 import com.dotnar.service.SMSService;
 import hprose.server.HproseTcpServer;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Controller;
 
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class TCPController implements InitializingBean {
+
+    private static Logger logger = Logger.getLogger(TCPController.class);
     public static HproseTcpServer server = null;
 
     @Override
@@ -26,6 +29,7 @@ public class TCPController implements InitializingBean {
                 server.setEnabledThreadPool(true);
                 server.start();
                 System.out.println("===== 工具监听端口开启 =====");
+                logger.info("===== 工具监听端口开启 =====");
             }
         } catch (Exception e) {
             e.printStackTrace();

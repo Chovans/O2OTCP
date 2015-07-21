@@ -1,5 +1,7 @@
 package com.dotnar.bean;
 
+import java.util.Arrays;
+
 public class User extends BaseResult{
 
 	private Integer subscribe;		//用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息。
@@ -132,4 +134,22 @@ public class User extends BaseResult{
 		this.groupid = groupid;
 	}
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"subscribe=" + subscribe +
+				", openid='" + openid + '\'' +
+				", nickname='" + nickname + '\'' +
+				", sex=" + sex +
+				", language='" + language + '\'' +
+				", city='" + city + '\'' +
+				", province='" + province + '\'' +
+				", country='" + country + '\'' +
+				", headimgurl='" + headimgurl + '\'' +
+				", subscribe_time=" + subscribe_time +
+				", privilege=" + Arrays.toString(privilege) +
+				", unionid='" + unionid + '\'' +
+				", groupid=" + groupid +
+				'}';
+	}
 }

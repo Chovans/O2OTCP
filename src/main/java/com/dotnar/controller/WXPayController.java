@@ -1,16 +1,23 @@
 package com.dotnar.controller;
 
 import com.dotnar.bean.paymch.Closeorder;
+import com.dotnar.bean.sns.Oauth2;
 import com.dotnar.contant.WXPayConfigure;
+import com.dotnar.dao.OauthRepository;
 import com.dotnar.filter.TCPFilter;
+import com.dotnar.support.Oauth2Manager;
 import com.dotnar.support.TicketManager;
 import com.dotnar.support.TokenManager;
 import com.dotnar.wx.service.*;
 import hprose.server.HproseTcpServer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 /**
  * 微信支付初始化
@@ -18,7 +25,11 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class WXPayController implements InitializingBean {
-    private Log logger = LogFactory.getLog(WXPayController.class);
+
+    @Autowired
+    private OauthRepository oauthRepository;
+
+    private static Logger logger = Logger.getLogger(WXPayController.class);
     public static HproseTcpServer server = null;
 
     @Override
@@ -48,6 +59,8 @@ public class WXPayController implements InitializingBean {
                 System.out.println("===== 微信支付监听端口开启 =====");
                 logger.info("===== 微信支付监听端口开启 =====");
 
+                System.out.println("==== init oauth2 ====");
+                Oauth2Manager.init((List<Oauth2>) oauthRepository.findAll());
 
                 long begin = System.currentTimeMillis();
                 //获取当前账号下的token和ticket
