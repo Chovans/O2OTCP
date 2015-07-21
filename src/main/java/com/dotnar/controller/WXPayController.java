@@ -7,6 +7,8 @@ import com.dotnar.support.TicketManager;
 import com.dotnar.support.TokenManager;
 import com.dotnar.wx.service.*;
 import hprose.server.HproseTcpServer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Controller;
 
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class WXPayController implements InitializingBean {
+    private Log logger = LogFactory.getLog(WXPayController.class);
     public static HproseTcpServer server = null;
 
     @Override
@@ -43,6 +46,7 @@ public class WXPayController implements InitializingBean {
                 server.setEnabledThreadPool(true);
                 server.start();
                 System.out.println("===== 微信支付监听端口开启 =====");
+                logger.info("===== 微信支付监听端口开启 =====");
 
 
                 long begin = System.currentTimeMillis();
@@ -58,8 +62,11 @@ public class WXPayController implements InitializingBean {
                 }
                 long end = System.currentTimeMillis();
                 System.out.println("===== 获取token和ticket共耗时："+(end-begin)+"毫秒 ====");
-                System.out.println("===== token="+ TokenManager.getToken(WXPayConfigure.DEFAULT_APPID)+" ====");
-                System.out.println("===== ticket="+ TicketManager.getTicket(WXPayConfigure.DEFAULT_APPID)+" ====");
+                System.out.println("===== token=" + TokenManager.getToken(WXPayConfigure.DEFAULT_APPID) + " ====");
+                System.out.println("===== ticket="+ TicketManager.getTicket(WXPayConfigure.DEFAULT_APPID)+" ====");System.out.println("===== 获取token和ticket共耗时："+(end-begin)+"毫秒 ====");
+                logger.info("===== 获取token和ticket共耗时：" + (end - begin) + "毫秒 ====");
+                logger.info("===== token=" + TokenManager.getToken(WXPayConfigure.DEFAULT_APPID) + " ====");
+                logger.info("===== ticket="+ TicketManager.getTicket(WXPayConfigure.DEFAULT_APPID) + " ====");
             }
         } catch (Exception e) {
             e.printStackTrace();

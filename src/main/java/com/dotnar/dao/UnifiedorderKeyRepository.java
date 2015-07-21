@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component;
 @Component("UnifiedorderKeyRepository")
 public interface UnifiedorderKeyRepository extends CrudRepository<UnifiedorderKey,String>{
     public UnifiedorderKey findByAppIdAndMchIdAndOutTradeNoAndOpenId(String appId,String mchId,String outTradeNo,String openId);
+    public UnifiedorderKey findByOutTradeNo(String outTradeNo);
 }

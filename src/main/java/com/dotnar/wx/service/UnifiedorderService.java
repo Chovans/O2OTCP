@@ -115,20 +115,26 @@ public class UnifiedorderService {
                                                        HttpServletResponse response) throws Exception {
 
         System.out.println("==== 收到微信回调：" + xmlString);
+        logger.info("==== 收到微信回调：" + xmlString);
         //获取请求数据
         MchPayNotify payNotify = XMLConverUtil.convertToObject(MchPayNotify.class, xmlString);
         payNotify.setCreateOn(new Date());
         //已处理 去重
         if (expireSet.contains(payNotify.getTransaction_id())) {
+            logger.info("==== 收到重复请求 ====");
             return null;
         }
         //获取key
-        UnifiedorderKey unifiedorderKey = unifiedorderKeyRepository.findByAppIdAndMchIdAndOutTradeNoAndOpenId(payNotify.getAppid(), payNotify.getMch_id(),
-                payNotify.getOut_trade_no(), payNotify.getOpenid());
+        //UnifiedorderKey unifiedorderKey = unifiedorderKeyRepository.findByAppIdAndMchIdAndOutTradeNoAndOpenId(payNotify.getAppid(), payNotify.getMch_id(),
+        //        payNotify.getOut_trade_no(), payNotify.getOpenid());
+
+        UnifiedorderKey unifiedorderKey = unifiedorderKeyRepository.findByOutTradeNo(payNotify.getOut_trade_no());
         System.out.println("==== 验证签名 ====");
+        logger.info("==== 验证签名 ====");
         //签名验证
         if (SignatureUtil.validateAppSignature(payNotify, unifiedorderKey.get_key())) {
             System.out.println("==== 验证签名成功 ====");
+            logger.info("==== 验证签名成功 ====");
             expireSet.add(payNotify.getTransaction_id());
             MchNotifyXml baseResult = new MchNotifyXml();
             baseResult.setReturn_code("SUCCESS");
@@ -146,6 +152,7 @@ public class UnifiedorderService {
             return unifiedorderKey;
         } else {
             System.out.println("==== 验证签名失败 ====");
+            logger.info("==== 验证签名失败 ====");
             MchNotifyXml baseResult = new MchNotifyXml();
             baseResult.setReturn_code("FAIL");
             baseResult.setReturn_msg("ERROR");
@@ -157,24 +164,26 @@ public class UnifiedorderService {
 
     public static void main(String[] args){
         String xml = "<xml><appid><![CDATA[wxcf74f930098faee1]]></appid>\n" +
-                "<bank_type><![CDATA[ICBC_DEBIT]]></bank_type>\n" +
-                "<cash_fee><![CDATA[1]]></cash_fee>\n" +
+                "<bank_type><![CDATA[CFT]]></bank_type>\n" +
+                "<cash_fee><![CDATA[2]]></cash_fee>\n" +
                 "<fee_type><![CDATA[CNY]]></fee_type>\n" +
                 "<is_subscribe><![CDATA[Y]]></is_subscribe>\n" +
                 "<mch_id><![CDATA[1233472902]]></mch_id>\n" +
-                "<nonce_str><![CDATA[8410b0d26cc54d56a8f8]]></nonce_str>\n" +
-                "<openid><![CDATA[o_QrEjiA5Yvgp3N4HnKhy9O5J1mU]]></openid>\n" +
-                "<out_trade_no><![CDATA[PA_A_aauvmig0]]></out_trade_no>\n" +
+                "<nonce_str><![CDATA[1babe2d2259e4ea09d58]]></nonce_str>\n" +
+                "<openid><![CDATA[o_QrEjrASQgVq-RiyhMifmEsqdr8]]></openid>\n" +
+                "<out_trade_no><![CDATA[PA_A_agnkr63]]></out_trade_no>\n" +
                 "<result_code><![CDATA[SUCCESS]]></result_code>\n" +
                 "<return_code><![CDATA[SUCCESS]]></return_code>\n" +
-                "<sign><![CDATA[11C5BA8F52370B4094D6E0385B5AA1FE]]></sign>\n" +
-                "<time_end><![CDATA[20150720175545]]></time_end>\n" +
-                "<total_fee>1</total_fee>\n" +
+                "<sign><![CDATA[A1C75C7AB7C010DE3BF110715F672AAC]]></sign>\n" +
+                "<time_end><![CDATA[20150721111404]]></time_end>\n" +
+                "<total_fee>2</total_fee>\n" +
                 "<trade_type><![CDATA[JSAPI]]></trade_type>\n" +
-                "<transaction_id><![CDATA[1009600275201507200443479051]]></transaction_id>\n" +
+                "<transaction_id><![CDATA[1010110275201507210447287248]]></transaction_id>\n" +
+                "<securityKey><![CDATA[55f7f652c7875232b82432dcf437e56b]]></securityKey>\n" +
                 "</xml>";
 
         try{
+
             NotifyUtil.sendToJS(XMLConverUtil.convertToObject(MchPayNotify.class, xml));
         }catch (Exception e){
             System.out.println(e.getMessage());
