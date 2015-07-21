@@ -11,6 +11,8 @@ import com.dotnar.support.TokenManager;
 import com.dotnar.util.JsUtil;
 import com.dotnar.util.JsonUtil;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
@@ -29,6 +31,8 @@ import java.util.UUID;
  */
 @Service
 public class JSSDKConfigService {
+
+    private static Log logger = LogFactory.getLog(JSSDKConfigService.class);
 
     /**
      * jssdk中wx的初始化参数
@@ -60,7 +64,8 @@ public class JSSDKConfigService {
                 result.setNonceStr(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20));
                 result.setTimestamp(String.valueOf(new Date().getTime() / 1000));
 
-                System.out.println("ticket = " +ticket);
+                //System.out.println("ticket = " +ticket);
+                logger.info("====jssdk初始化：" + ticket);
 
                 String sign = JsUtil.generateConfigSignature(result.getNonceStr(), ticket,
                         result.getTimestamp(), jsInitialize.getUrl());

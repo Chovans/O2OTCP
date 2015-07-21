@@ -48,7 +48,7 @@
     <!--log4j-->
     <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>ctool.root</param-value>
+        <param-value>o2o.root</param-value>
     </context-param>
 
     <context-param>

@@ -9,23 +9,16 @@ import com.dotnar.dao.UnifiedorderRepository;
 import com.dotnar.dao.UnifiedorderResultRepository;
 import com.dotnar.exception.WXPayExceptioin;
 import com.dotnar.util.*;
-import org.apache.http.client.HttpClient;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -36,6 +29,8 @@ public class UnifiedorderService {
 
     //重复通知过滤  时效60秒
     private static ExpireSet<String> expireSet = new ExpireSet<String>(60);
+
+    private static Log logger = LogFactory.getLog(UnifiedorderService.class);
     private static UnifiedorderRepository unifiedorderRepository;
     private static UnifiedorderKeyRepository unifiedorderKeyRepository;
     private static UnifiedorderResultRepository unifiedorderResultRepository;
@@ -75,7 +70,7 @@ public class UnifiedorderService {
         unifiedorder.setNotify_url(WXPayConfigure.NOTIFY_URL);
 
         System.out.println("====接受预支付订单请求：" + unifiedorder + new Date());
-
+        logger.info("====接受预支付订单请求：" + unifiedorder);
 
         //记录一个UnifiedorderKey，key信息
         UnifiedorderKey unifiedorderKey = new UnifiedorderKey();
