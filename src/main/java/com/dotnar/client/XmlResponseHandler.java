@@ -1,5 +1,6 @@
 package com.dotnar.client;
 
+import com.dotnar.exception.WXPayException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -8,6 +9,7 @@ import org.apache.http.util.EntityUtils;
 import com.dotnar.util.XMLConverUtil;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,9 +30,11 @@ public class XmlResponseHandler{
 	                if (status >= 200 && status < 300) {
 	                    HttpEntity entity = response.getEntity();
 	                    String str = EntityUtils.toString(entity);
-						System.out.println("==== 从服务器获取xml：" + str +" ====");
+						System.out.println("==== 从服务器获取xml"+ new Date() +"：" + str +" ====");
 						try{
-
+							if(XMLConverUtil.checkIsError(str)){
+								throw new WXPayException(str);
+							}
 	                   		return XMLConverUtil.convertToObject(clazz,new String(str.getBytes("iso-8859-1"),"utf-8"));
 						}catch (Exception e){
 							try {

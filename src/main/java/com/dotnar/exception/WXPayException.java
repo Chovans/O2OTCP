@@ -4,9 +4,9 @@ package com.dotnar.exception;
  * 抛出异常
  * Created by chovans on 15/7/20.
  */
-public class WXPayExceptioin extends Exception {
+public class WXPayException extends Exception {
 
-   public WXPayExceptioin(String message){
+   public WXPayException(String message){
        this.errmsg = message;
    }
     private String errmsg;

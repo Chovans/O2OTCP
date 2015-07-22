@@ -3,7 +3,7 @@ package com.dotnar.wx.service;
 import com.dotnar.api.PayMchAPI;
 import com.dotnar.bean.paymch.Closeorder;
 import com.dotnar.bean.paymch.MchBaseResult;
-import com.dotnar.exception.WXPayExceptioin;
+import com.dotnar.exception.WXPayException;
 import com.dotnar.util.JsonUtil;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class CloseOrderService {
 
             result = PayMchAPI.payCloseorder(closeorder,key);
         }catch (Exception e){
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
 
 

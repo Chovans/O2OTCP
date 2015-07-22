@@ -4,18 +4,21 @@ import com.dotnar.api.SnsAPI;
 import com.dotnar.bean.BaseResult;
 import com.dotnar.bean.SnsToken;
 import com.dotnar.bean.sns.Oauth2;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 网页授权access_token
  * Created by chovans on 15/7/21.
  */
 public class Oauth2Manager {
+
+    private static Logger logger = Logger.getLogger(Oauth2.class);
+
     private static Map<String,String> refreshTokenMap = new LinkedHashMap<String,String>();
     private static Map<String,String> accessTokenMap = new LinkedHashMap<String,String>();
     private static Map<String,String> openIdUnionIdMap = new HashMap<String, String>();
@@ -38,7 +41,7 @@ public class Oauth2Manager {
      * @param oauth2s
      */
     public static void init(List<Oauth2> oauth2s){
-        System.out.println("==== Oauth2长度：" + oauth2s.size() +" ====");
+        System.out.println("==== 初始化Oauth2长度：" + oauth2s.size() +" ====");
         for(Oauth2 oauth2:oauth2s){
             refreshTokenMap.put(oauth2.getOpenid(),oauth2.getRefresh_token());
             accessTokenMap.put(oauth2.getOpenid(),oauth2.getAccess_token());
@@ -61,14 +64,27 @@ public class Oauth2Manager {
 
         //accessToken可用时
         if(result.getErrmsg().equals("ok")){
+            System.out.println("==== " +
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + ":token = "+accessTokenMap.get(openid)
+                    +" 验证可用 ====");
+            logger.info("==== " +
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + ":token = "+accessTokenMap.get(openid)
+            +" 验证可用 ====");
             return accessTokenMap.get(openid);
         }
         //accessToken不可用时
         else
         {
+            System.out.println("==== " +
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + ":token = "+accessTokenMap.get(openid)
+                    +" 验证不可用，重新获取 ====");
+            logger.info("==== " +
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + ":token = "+accessTokenMap.get(openid)
+                    +" 验证不可用，重新获取 ====");
             //重新获取accessToken
             SnsToken snsToken = SnsAPI.refreshOauth2AccessToken(appid, refreshTokenMap.get(openid));
 
+            System.out.println("==== 获取到的token：" + snsToken +" ====");
             //如果获取到accessToken的情况下，则表明refreshToken未过期
             if(!StringUtils.isEmpty(snsToken.getAccess_token())){
                 accessTokenMap.put(openid,snsToken.getAccess_token());

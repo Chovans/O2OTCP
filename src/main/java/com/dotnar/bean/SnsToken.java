@@ -82,4 +82,18 @@ public class SnsToken extends BaseResult {
     public void setUnionid(String unionid) {
         this.unionid = unionid;
     }
+
+    @Override
+    public String toString() {
+        return "SnsToken{" +
+                "access_token='" + access_token + '\'' +
+                ", expires_in=" + expires_in +
+                ", refresh_token='" + refresh_token + '\'' +
+                ", openid='" + openid + '\'' +
+                ", unionid='" + unionid + '\'' +
+                ", scope='" + scope + '\'' +
+                ", errcode='" + errcode + '\'' +
+                ", errmsg='" + errmsg + '\'' +
+                '}';
+    }
 }

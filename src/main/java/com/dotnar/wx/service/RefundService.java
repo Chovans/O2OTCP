@@ -1,15 +1,13 @@
 package com.dotnar.wx.service;
 
-import com.alibaba.fastjson.JSON;
 import com.dotnar.api.PayMchAPI;
 import com.dotnar.bean.paymch.Refundquery;
 import com.dotnar.bean.paymch.RefundqueryResult;
 import com.dotnar.bean.paymch.SecapiPayRefund;
 import com.dotnar.bean.paymch.SecapiPayRefundResult;
 import com.dotnar.dao.SecapiPayRefundRepository;
-import com.dotnar.exception.WXPayExceptioin;
+import com.dotnar.exception.WXPayException;
 import com.dotnar.util.JsonUtil;
-import net.sf.json.util.JSONUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -57,7 +55,7 @@ public class RefundService {
             //记录退款申请
             secapiPayRefundRepository.save(secapiPayRefund);
         }catch (Exception e){
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
 
         return JsonUtil.toJSONString(secapiPayRefundResult);
@@ -85,7 +83,7 @@ public class RefundService {
         try{
             refundqueryResult  = PayMchAPI.payRefundquery(refundquery,key);
         }catch (Exception e){
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
 
         return JsonUtil.toJSONString(refundqueryResult);

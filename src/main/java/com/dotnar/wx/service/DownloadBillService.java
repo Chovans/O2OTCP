@@ -3,9 +3,8 @@ package com.dotnar.wx.service;
 import com.dotnar.api.PayMchAPI;
 import com.dotnar.bean.paymch.MchBaseResult;
 import com.dotnar.bean.paymch.MchDownloadbill;
-import com.dotnar.exception.WXPayExceptioin;
+import com.dotnar.exception.WXPayException;
 import com.dotnar.util.JsonUtil;
-import net.sf.json.util.JSONUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -39,7 +38,7 @@ public class DownloadBillService {
         try{
             mchBaseResult = PayMchAPI.payDownloadbill(mchDownloadbill, key);
         }catch (Exception e){
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
         return JsonUtil.toJSONString(mchBaseResult);
     }

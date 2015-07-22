@@ -7,7 +7,7 @@ import com.dotnar.dao.MchPayNotifyRepository;
 import com.dotnar.dao.UnifiedorderKeyRepository;
 import com.dotnar.dao.UnifiedorderRepository;
 import com.dotnar.dao.UnifiedorderResultRepository;
-import com.dotnar.exception.WXPayExceptioin;
+import com.dotnar.exception.WXPayException;
 import com.dotnar.util.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +96,7 @@ public class UnifiedorderService {
                     unifiedorderResult.getAppid(), key, unifiedorderResult.getCode_url());
 
         } catch (Exception e) {
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
 
         return json;

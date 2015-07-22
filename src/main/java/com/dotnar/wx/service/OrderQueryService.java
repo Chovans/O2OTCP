@@ -3,7 +3,7 @@ package com.dotnar.wx.service;
 import com.dotnar.api.PayMchAPI;
 import com.dotnar.bean.paymch.MchOrderInfoResult;
 import com.dotnar.bean.paymch.MchOrderquery;
-import com.dotnar.exception.WXPayExceptioin;
+import com.dotnar.exception.WXPayException;
 import com.dotnar.util.JsonUtil;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class OrderQueryService {
         try{
             result = PayMchAPI.payOrderquery(orderquery,key);
         }catch (Exception e){
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
 
         return JsonUtil.toJSONString(result);

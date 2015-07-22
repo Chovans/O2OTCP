@@ -7,11 +7,9 @@ import com.dotnar.bean.sns.Code;
 import com.dotnar.bean.sns.Oauth2;
 import com.dotnar.contant.WXPayConfigure;
 import com.dotnar.dao.OauthRepository;
-import com.dotnar.exception.WXPayExceptioin;
+import com.dotnar.exception.WXPayException;
 import com.dotnar.support.Oauth2Manager;
 import com.dotnar.util.JsonUtil;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +42,11 @@ public class Oauth2Service {
     public static String oauth2RefreshToken(String jsonObj){
         Code code = JsonUtil.parseObject(jsonObj, Code.class);
         if(org.springframework.util.StringUtils.isEmpty(code.getCode())){
-            return JsonUtil.toJSONString(new WXPayExceptioin("code is empty!!"));
+            return JsonUtil.toJSONString(new WXPayException("code is empty!!"));
         }
 
         System.out.println("==== 获取用户信息：收到的code=" + code.getCode() + " =====");
+        logger.info("==== 获取用户信息：收到的code=" + code.getCode() + " =====");
 
         try {
             SnsToken snsToken = SnsAPI.oauth2AccessToken(WXPayConfigure.DEFAULT_APPID, WXPayConfigure.DEFAULT_SECRET, code.getCode());
@@ -55,7 +54,7 @@ public class Oauth2Service {
             return JsonUtil.toJSONString(snsToken);
         } catch (Exception e) {
             e.printStackTrace();
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
     }
 
@@ -79,6 +78,7 @@ public class Oauth2Service {
                  *  openid = accessToken
                  */
                 System.out.println("==== 存入token ====");
+                logger.info("==== 存入token ====");
                 Oauth2Manager.setRefreshToken(snsToken.getOpenid(), snsToken.getRefresh_token());
                 Oauth2Manager.setAccessToken(snsToken.getOpenid(), snsToken.getRefresh_token());
                 Oauth2Manager.setUnionId(snsToken.getOpenid(),snsToken.getUnionid());
@@ -92,11 +92,12 @@ public class Oauth2Service {
             }
 
             System.out.println("==== 返回信息：" + snsToken + " =====");
+            logger.info("==== 返回信息：" + snsToken + " =====");
 
             return JsonUtil.toJSONString(snsToken);
         }catch (Exception e){
             e.printStackTrace();
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
     }
 
@@ -108,21 +109,31 @@ public class Oauth2Service {
      */
     public static String oauth2AccessToken(String appid,String openid){
 
+        if(StringUtils.isEmpty(appid)){
+            return JsonUtil.toJSONString(new WXPayException("appid is null"));
+        }
+        if(StringUtils.isEmpty(openid)){
+            return JsonUtil.toJSONString(new WXPayException("openid is null"));
+        }
+
         System.out.println("==== appid:"+appid+" =====");
         System.out.println("==== openid:"+openid+" =====");
+        logger.info("==== appid:" + appid + " =====");
+        logger.info("==== openid:" + openid + " =====");
 
         //获取accessToken
         String accessToken = null;
         try {
             accessToken = Oauth2Manager.getAccessToken(appid, openid);
-            System.out.println("==== " + accessToken +" ====");
+            System.out.println("==== Oauth2获取的Token:" + accessToken +" ====");
         } catch (Exception e) {
             e.printStackTrace();
-            return JsonUtil.toJSONString(new WXPayExceptioin("get access_token fail"));
+            return JsonUtil.toJSONString(new WXPayException("get access_token fail"));
         }
 
         if(accessToken == null){
-            return JsonUtil.toJSONString(new WXPayExceptioin("refresh_token invalid"));
+            System.out.println("refresh_token time out");
+            return JsonUtil.toJSONString(new WXPayException("refresh_token time out"));
         }
         try {
             User user = SnsAPI.userinfo(accessToken, openid, "zh_CN");
@@ -137,8 +148,7 @@ public class Oauth2Service {
             return JsonUtil.toJSONString(user);
         } catch (Exception e) {
             e.printStackTrace();
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
-
     }
 }

@@ -1,5 +1,6 @@
 package com.dotnar.client;
 
+import com.dotnar.exception.WXPayException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -8,6 +9,7 @@ import org.apache.http.util.EntityUtils;
 import com.dotnar.util.JsonUtil;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +31,14 @@ public class JsonResponseHandler{
 	                if (status >= 200 && status < 300) {
 	                    HttpEntity entity = response.getEntity();
 	                    String str = EntityUtils.toString(entity);
-						System.out.println("==== 从服务器获取json：" + str +" ====");
+						System.out.println("==== 从服务器获取json"+ new Date() +"：" + str +" ====");
+						if(JsonUtil.checkIsError(str)){
+							try {
+								throw new WXPayException(str);
+							} catch (WXPayException e) {
+								e.printStackTrace();
+							}
+						}
 						return JsonUtil.parseObject(new String(str.getBytes("iso-8859-1"),"utf-8"), clazz);
 	                } else {
 	                    throw new ClientProtocolException("Unexpected response status: " + status);

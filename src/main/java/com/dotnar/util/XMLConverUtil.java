@@ -1,6 +1,8 @@
 package com.dotnar.util;
 
+import com.dotnar.bean.BaseResult;
 import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
+import org.springframework.util.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -19,6 +21,33 @@ public class XMLConverUtil{
 
 	private static Map<Class<?>,Unmarshaller> uMap = new HashMap<Class<?>,Unmarshaller>();
 	private static Map<Class<?>,Marshaller> mMap = new HashMap<Class<?>,Marshaller>();
+
+	/**
+	 * 检验返回的xml中error_code和error_msg是否正常
+	 * @param xml
+	 * @return 	true 微信端返回错误信息
+	 * 			false 微信端返回信息正常
+	 */
+	public static Boolean checkIsError(String xml){
+		try {
+			BaseResult baseResult = convertToObject(BaseResult.class,xml);
+
+			//检验返回xml中是否含有error字段，若没有则返回false
+			if(org.springframework.util.StringUtils.isEmpty(baseResult.getErrcode())){
+				return false;
+			}
+			//检验若返回的xml中，error_code=0或者error_msg=“ok”则表明正常，无错，返回false
+			if(baseResult.getErrcode().equals("0") || baseResult.getErrmsg().equals("ok")){
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			//在解析过程中没用解析到error字段可能报错，表明没有error，返回false
+			return false;
+		}
+		//执行到此表明微信服务端返回错误信息，返回true
+		return true;
+	}
 
 	/**
 	 * XML to Object

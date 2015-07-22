@@ -2,10 +2,9 @@ package com.dotnar.wx.service;
 
 import com.dotnar.bean.js.JSInitialize;
 import com.dotnar.bean.js.JSInitializeResult;
-import com.dotnar.client.HttpClientFactory;
 import com.dotnar.client.LocalHttpClient;
 import com.dotnar.contant.WXPayConfigure;
-import com.dotnar.exception.WXPayExceptioin;
+import com.dotnar.exception.WXPayException;
 import com.dotnar.support.TicketManager;
 import com.dotnar.support.TokenManager;
 import com.dotnar.util.JsUtil;
@@ -14,13 +13,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
-import org.apache.http.entity.StringEntity;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.StringWriter;
-import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.UUID;
 
@@ -96,7 +93,7 @@ public class JSSDKConfigService {
 
 
         } catch (Exception e) {
-            return JsonUtil.toJSONString(new WXPayExceptioin(e.getMessage()));
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
 
         return JsonUtil.toJSONString(result);
