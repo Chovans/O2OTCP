@@ -9,8 +9,10 @@ import com.dotnar.contant.WXPayConfigure;
 import com.dotnar.dao.OauthRepository;
 import com.dotnar.exception.WXPayException;
 import com.dotnar.support.Oauth2Manager;
+import com.dotnar.util.JsUtil;
 import com.dotnar.util.JsonUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,55 +26,37 @@ import org.springframework.util.StringUtils;
 @Service
 public class Oauth2Service {
 
-    private static Logger logger = Logger.getLogger(Oauth2Service.class);
+    private static Logger logger = LoggerFactory.getLogger(Oauth2Service.class);
 
     private static OauthRepository oauthRepository = null;
 
     @Autowired
-    public Oauth2Service(@Qualifier("OauthRepository")OauthRepository oauthRepository) {
+    public Oauth2Service(@Qualifier("OauthRepository") OauthRepository oauthRepository) {
         this.oauthRepository = oauthRepository;
     }
 
     /**
-     * 根据code获取openid等参数
-     *  e.g. {"code":"xxxxxx"}
-     * @param jsonObj
-     * @return
-     */
-    public static String oauth2RefreshToken(String jsonObj){
-        Code code = JsonUtil.parseObject(jsonObj, Code.class);
-        if(org.springframework.util.StringUtils.isEmpty(code.getCode())){
-            return JsonUtil.toJSONString(new WXPayException("code is empty!!"));
-        }
-
-        System.out.println("==== 获取用户信息：收到的code=" + code.getCode() + " =====");
-        logger.info("==== 获取用户信息：收到的code=" + code.getCode() + " =====");
-
-        try {
-            SnsToken snsToken = SnsAPI.oauth2AccessToken(WXPayConfigure.DEFAULT_APPID, WXPayConfigure.DEFAULT_SECRET, code.getCode());
-            System.out.println(JsonUtil.toJSONString(snsToken));
-            return JsonUtil.toJSONString(snsToken);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
-        }
-    }
-
-    /**
      * 通过code换取网页授权access_token
+     *
      * @param appid
      * @param appSecret
      * @param code
      * @return
      */
-    public static String oauth2Code(String appid,String appSecret,String code){
-        System.out.println("==== 获取用户信息：收到的code="+code+" =====");
-        logger.info("==== 获取用户信息：收到的code=" + code + " =====");
-        try{
-            SnsToken snsToken = SnsAPI.oauth2AccessToken(appid,appSecret, code);
+    public static String oauth2Code(String appid, String appSecret, String code) {
+
+        try {
+            if (JsUtil.isEmpty(appid, appSecret, code) != null) {
+                return JsonUtil.toJSONString(new WXPayException(JsUtil.isEmpty(appid, appSecret, code) + "is null"));
+            }
+
+            System.out.println("==== 获取用户信息：收到的code=" + code + " =====");
+            logger.info("==== 获取用户信息：收到的code=" + code + " =====");
+
+            SnsToken snsToken = SnsAPI.oauth2AccessToken(appid, appSecret, code);
 
             //如果没报错，则存入refreshToken和access_Token
-            if(StringUtils.isEmpty(snsToken.getErrmsg())){
+            if (StringUtils.isEmpty(snsToken.getErrmsg())) {
                 /**
                  *  openid = refreshToken
                  *  openid = accessToken
@@ -81,11 +65,11 @@ public class Oauth2Service {
                 logger.info("==== 存入token ====");
                 Oauth2Manager.setRefreshToken(snsToken.getOpenid(), snsToken.getRefresh_token());
                 Oauth2Manager.setAccessToken(snsToken.getOpenid(), snsToken.getRefresh_token());
-                Oauth2Manager.setUnionId(snsToken.getOpenid(),snsToken.getUnionid());
+                Oauth2Manager.setUnionId(snsToken.getOpenid(), snsToken.getUnionid());
 
                 //存入数据库
                 Oauth2 oauth2 = new Oauth2();
-                BeanUtils.copyProperties(snsToken,oauth2);
+                BeanUtils.copyProperties(snsToken, oauth2);
                 oauth2.setAppid(appid);
                 oauthRepository.save(oauth2);
 
@@ -95,7 +79,7 @@ public class Oauth2Service {
             logger.info("==== 返回信息：" + snsToken + " =====");
 
             return JsonUtil.toJSONString(snsToken);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
         }
@@ -104,47 +88,47 @@ public class Oauth2Service {
     /**
      * 根据appid,openid获取用户个人信息
      * 需scope为 snsapi_userinfo
+     *
      * @param appid
      * @return
      */
-    public static String oauth2AccessToken(String appid,String openid){
+    public static String oauth2AccessToken(String appid, String openid) {
 
-        if(StringUtils.isEmpty(appid)){
-            return JsonUtil.toJSONString(new WXPayException("appid is null"));
-        }
-        if(StringUtils.isEmpty(openid)){
-            return JsonUtil.toJSONString(new WXPayException("openid is null"));
-        }
-
-        System.out.println("==== appid:"+appid+" =====");
-        System.out.println("==== openid:"+openid+" =====");
-        logger.info("==== appid:" + appid + " =====");
-        logger.info("==== openid:" + openid + " =====");
-
-        //获取accessToken
-        String accessToken = null;
         try {
-            accessToken = Oauth2Manager.getAccessToken(appid, openid);
-            System.out.println("==== Oauth2获取的Token:" + accessToken +" ====");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return JsonUtil.toJSONString(new WXPayException("get access_token fail"));
-        }
+            if (JsUtil.isEmpty(appid, openid) != null) {
+                return JsonUtil.toJSONString(new WXPayException(JsUtil.isEmpty(appid, openid) + "is null"));
+            }
 
-        if(accessToken == null){
-            System.out.println("refresh_token time out");
-            return JsonUtil.toJSONString(new WXPayException("refresh_token time out"));
-        }
-        try {
+            System.out.println("==== appid:" + appid + " =====");
+            System.out.println("==== openid:" + openid + " =====");
+            logger.info("==== appid:" + appid + " =====");
+            logger.info("==== openid:" + openid + " =====");
+
+            //获取accessToken
+            String accessToken = null;
+            try {
+                accessToken = Oauth2Manager.getAccessToken(appid, openid);
+                System.out.println("==== Oauth2获取的Token:" + accessToken + " ====");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return JsonUtil.toJSONString(new WXPayException("get access_token fail"));
+            }
+
+            if (accessToken == null) {
+                System.out.println("refresh_token time out");
+                return JsonUtil.toJSONString(new WXPayException("refresh_token time out"));
+            }
+
             User user = SnsAPI.userinfo(accessToken, openid, "zh_CN");
             user.setUnionid(Oauth2Manager.getUnionId(user.getOpenid()));
+            System.out.println("==== 获取用户信息：" + user + " ====");
 
-            System.out.println("==== 更新授权ACCESS_TOKEN ====");
-            Oauth2 oauth2 = oauthRepository.findOne(user.getOpenid());
-            oauth2.setAccess_token(accessToken);
-            oauthRepository.save(oauth2);
-
-            System.out.println("==== User:" + user +" ====");
+            if (StringUtils.isEmpty(user.getOpenid())) {
+                System.out.println("==== 更新授权ACCESS_TOKEN ====");
+                Oauth2 oauth2 = oauthRepository.findOne(user.getOpenid());
+                oauth2.setAccess_token(accessToken);
+                oauthRepository.save(oauth2);
+            }
             return JsonUtil.toJSONString(user);
         } catch (Exception e) {
             e.printStackTrace();

@@ -9,7 +9,8 @@ import com.dotnar.dao.UnifiedorderRepository;
 import com.dotnar.dao.UnifiedorderResultRepository;
 import com.dotnar.exception.WXPayException;
 import com.dotnar.util.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class UnifiedorderService {
     //重复通知过滤  时效60秒
     private static ExpireSet<String> expireSet = new ExpireSet<String>(60);
 
-    private static Logger logger = Logger.getLogger(UnifiedorderService.class);
+    private static Logger logger = LoggerFactory.getLogger(UnifiedorderService.class);
     private static UnifiedorderRepository unifiedorderRepository;
     private static UnifiedorderKeyRepository unifiedorderKeyRepository;
     private static UnifiedorderResultRepository unifiedorderResultRepository;
@@ -59,32 +60,29 @@ public class UnifiedorderService {
      */
     public static String payRequestJson(String objectInfo, String key, String security_key) {
 
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-
-        Unifiedorder unifiedorder = JsonUtil.parseObject(objectInfo, Unifiedorder.class);
-        unifiedorder.setNonce_str(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20));
-        unifiedorder.setTime_start(sdf.format(new Date()));
-        unifiedorder.setTime_expire(sdf.format(new Date().getTime() + (1000 * 60 * WXPayConfigure.EFFECTIVE_TIME)));
-        unifiedorder.setNotify_url(WXPayConfigure.NOTIFY_URL);
-
-        System.out.println("====接受预支付订单请求：" + unifiedorder + new Date());
-        logger.info("====接受预支付订单请求：" + unifiedorder);
-
-        //记录一个UnifiedorderKey，key信息
-        UnifiedorderKey unifiedorderKey = new UnifiedorderKey();
-        unifiedorderKey.setAppId(unifiedorder.getAppid());
-        unifiedorderKey.setMchId(unifiedorder.getMch_id());
-        unifiedorderKey.setOpenId(unifiedorder.getOpenid());
-        unifiedorderKey.setOutTradeNo(unifiedorder.getOut_trade_no());
-        unifiedorderKey.set_key(key);
-        unifiedorderKey.setSecurityKey(security_key);
-        unifiedorderKeyRepository.save(unifiedorderKey);
-
-
         String json = null;
-
         try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+
+            Unifiedorder unifiedorder = JsonUtil.parseObject(objectInfo, Unifiedorder.class);
+            unifiedorder.setNonce_str(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20));
+            unifiedorder.setTime_start(sdf.format(new Date()));
+            unifiedorder.setTime_expire(sdf.format(new Date().getTime() + (1000 * 60 * WXPayConfigure.EFFECTIVE_TIME)));
+            unifiedorder.setNotify_url(WXPayConfigure.NOTIFY_URL);
+
+            System.out.println("====接受预支付订单请求：" + unifiedorder + new Date());
+            logger.info("====接受预支付订单请求：" + unifiedorder);
+
+            //记录一个UnifiedorderKey，key信息
+            UnifiedorderKey unifiedorderKey = new UnifiedorderKey();
+            unifiedorderKey.setAppId(unifiedorder.getAppid());
+            unifiedorderKey.setMchId(unifiedorder.getMch_id());
+            unifiedorderKey.setOpenId(unifiedorder.getOpenid());
+            unifiedorderKey.setOutTradeNo(unifiedorder.getOut_trade_no());
+            unifiedorderKey.set_key(key);
+            unifiedorderKey.setSecurityKey(security_key);
+            unifiedorderKeyRepository.save(unifiedorderKey);
+
             UnifiedorderResult unifiedorderResult = PayMchAPI.payUnifiedorder(unifiedorder, key);
 
             //记录一个请求
@@ -127,9 +125,9 @@ public class UnifiedorderService {
         System.out.println("==== 收到的out_trade_no:" + payNotify.getOut_trade_no());
 
         UnifiedorderKey unifiedorderKey = null;
-        try{
+        try {
             unifiedorderKeyRepository.findByOutTradeNo(payNotify.getOut_trade_no());
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
 
@@ -166,7 +164,7 @@ public class UnifiedorderService {
         return null;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String xml = "<xml><appid><![CDATA[wxcf74f930098faee1]]></appid>\n" +
                 "<bank_type><![CDATA[CFT]]></bank_type>\n" +
                 "<cash_fee><![CDATA[2]]></cash_fee>\n" +
@@ -186,15 +184,14 @@ public class UnifiedorderService {
                 "<securityKey><![CDATA[55f7f652c7875232b82432dcf437e56b]]></securityKey>\n" +
                 "</xml>";
 
-        try{
+        try {
 
             NotifyUtil.sendToJS(XMLConverUtil.convertToObject(MchPayNotify.class, xml));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
     }
-
 
 
 }

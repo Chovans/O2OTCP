@@ -1,6 +1,7 @@
 package com.dotnar.util;
 
 import com.dotnar.bean.pay.PayPackage;
+import org.springframework.util.*;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -109,6 +110,22 @@ public class JsUtil {
 		map.put("paySign", paySign);
 		map.remove("appid");
 		return JsonUtil.toJSONString(map);
+	}
+
+	/**
+	 * 检验从js返回的数据中是否是空
+	 * @param objects
+	 * @return
+	 */
+	public static String isEmpty(Object...objects){
+		System.out.println("==== 验证js参数是否完全 ====" );
+		for(Object object:objects){
+			if(org.springframework.util.StringUtils.isEmpty(object)||object.equals("null") || object.equals("undefined")){
+				System.out.println("==== " +object.toString()+ "为空 ====");
+				return object.toString();
+			}
+		}
+		return null;
 	}
 
 }

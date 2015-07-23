@@ -13,7 +13,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -28,7 +29,7 @@ import java.util.UUID;
 @Service
 public class JSSDKConfigService {
 
-    private static Logger logger = Logger.getLogger(JSSDKConfigService.class);
+    private static Logger logger = LoggerFactory.getLogger(JSSDKConfigService.class);
 
     /**
      * jssdk中wx的初始化参数

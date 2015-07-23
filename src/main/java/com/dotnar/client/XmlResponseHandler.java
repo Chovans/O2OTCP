@@ -30,11 +30,11 @@ public class XmlResponseHandler{
 	                if (status >= 200 && status < 300) {
 	                    HttpEntity entity = response.getEntity();
 	                    String str = EntityUtils.toString(entity);
-						System.out.println("==== 从服务器获取xml"+ new Date() +"：" + str +" ====");
+						System.out.println("==== 从服务器获取xml"+ new Date() +"：" + new String(str.getBytes(),"UTF-8") +" ====");
 						try{
-							if(XMLConverUtil.checkIsError(str)){
-								throw new WXPayException(str);
-							}
+//							if(XMLConverUtil.checkIsError(str)){
+//								throw new WXPayException(str);
+//							}
 	                   		return XMLConverUtil.convertToObject(clazz,new String(str.getBytes("iso-8859-1"),"utf-8"));
 						}catch (Exception e){
 							try {

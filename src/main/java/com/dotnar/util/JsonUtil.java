@@ -23,17 +23,21 @@ public class JsonUtil {
 	 * 			false 数据正常
 	 */
 	public static Boolean checkIsError(String json){
+		System.out.println("==== 检验json: "+ json +" ====");
 		JSONObject jsonObject = JSON.parseObject(json);
 
 		try{
 			Integer errorCode = jsonObject.getInteger("errcode");
 			String errormessage = jsonObject.getString("errmsg");
 
-			if(errorCode == 0 || errormessage.equals("ok"))
-				return true;
+			if(errorCode == 0 || errormessage.equals("ok")){
+				System.out.println("==== 检测错误信息可忽略 ====");
+				return false;
+			}
 
-			return false;
+			return true;
 		}catch (Exception e){
+			System.out.println("==== 无法获取error信息，抛出异常 ====");
 			return false;
 		}
 
