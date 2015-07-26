@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -35,6 +37,7 @@ public class UnifiedorderService {
     private static UnifiedorderKeyRepository unifiedorderKeyRepository;
     private static UnifiedorderResultRepository unifiedorderResultRepository;
     private static MchPayNotifyRepository mchPayNotifyRepository;
+    private static Map<String,String> securityKey = new HashMap<String,String>();
 
     @Autowired(required = true)
     public UnifiedorderService(@Qualifier("UnifiedorderRepository") UnifiedorderRepository unifiedorderRepository,
@@ -126,8 +129,15 @@ public class UnifiedorderService {
 
         UnifiedorderKey unifiedorderKey = null;
         try {
-            unifiedorderKeyRepository.findByOutTradeNo(payNotify.getOut_trade_no());
+            unifiedorderKey = unifiedorderKeyRepository.findByOutTradeNo(payNotify.getOut_trade_no());
+            System.out.println("==== 搜索出的对象：" + unifiedorderKey +" ====");
         } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        if(unifiedorderKey.get_key() == null){
+            System.out.println("==== 数据库中搜索不到记录  ====");
             return null;
         }
 
@@ -166,24 +176,23 @@ public class UnifiedorderService {
 
     public static void main(String[] args) {
         String xml = "<xml><appid><![CDATA[wxcf74f930098faee1]]></appid>\n" +
-                "<bank_type><![CDATA[CFT]]></bank_type>\n" +
-                "<cash_fee><![CDATA[2]]></cash_fee>\n" +
+                "<bank_type><![CDATA[GDB_CREDIT]]></bank_type>\n" +
+                "<cash_fee><![CDATA[99800]]></cash_fee>\n" +
                 "<fee_type><![CDATA[CNY]]></fee_type>\n" +
-                "<is_subscribe><![CDATA[Y]]></is_subscribe>\n" +
+                "<is_subscribe><![CDATA[N]]></is_subscribe>\n" +
                 "<mch_id><![CDATA[1233472902]]></mch_id>\n" +
-                "<nonce_str><![CDATA[1babe2d2259e4ea09d58]]></nonce_str>\n" +
-                "<openid><![CDATA[o_QrEjrASQgVq-RiyhMifmEsqdr8]]></openid>\n" +
-                "<out_trade_no><![CDATA[PA_A_agnkr63]]></out_trade_no>\n" +
+                "<nonce_str><![CDATA[28891717d9c840f3bb24]]></nonce_str>\n" +
+                "<openid><![CDATA[o_QrEjimooJ784d_Kjx_YPpblB5I]]></openid>\n" +
+                "<out_trade_no><![CDATA[PA_A_gno6am6]]></out_trade_no>\n" +
                 "<result_code><![CDATA[SUCCESS]]></result_code>\n" +
                 "<return_code><![CDATA[SUCCESS]]></return_code>\n" +
-                "<sign><![CDATA[A1C75C7AB7C010DE3BF110715F672AAC]]></sign>\n" +
-                "<time_end><![CDATA[20150721111404]]></time_end>\n" +
-                "<total_fee>2</total_fee>\n" +
+                "<sign><![CDATA[100208B2A3EBA765A7FB1B1986AD545E]]></sign>\n" +
+                "<time_end><![CDATA[20150726174600]]></time_end>\n" +
+                "<total_fee>99800</total_fee>\n" +
                 "<trade_type><![CDATA[JSAPI]]></trade_type>\n" +
-                "<transaction_id><![CDATA[1010110275201507210447287248]]></transaction_id>\n" +
-                "<securityKey><![CDATA[55f7f652c7875232b82432dcf437e56b]]></securityKey>\n" +
+                "<transaction_id><![CDATA[1003800275201507260483366312]]></transaction_id>\n" +
+                "<securityKey><![CDATA[84e7cfcc2406fa75c1f029f3e48d2a28]]></securityKey>\n" +
                 "</xml>";
-
         try {
 
             NotifyUtil.sendToJS(XMLConverUtil.convertToObject(MchPayNotify.class, xml));

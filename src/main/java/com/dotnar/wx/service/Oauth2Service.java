@@ -125,7 +125,7 @@ public class Oauth2Service {
 
             if (StringUtils.isEmpty(user.getOpenid())) {
                 System.out.println("==== 更新授权ACCESS_TOKEN ====");
-                Oauth2 oauth2 = oauthRepository.findOne(user.getOpenid());
+                Oauth2 oauth2 = oauthRepository.findOne(openid);
                 oauth2.setAccess_token(accessToken);
                 oauthRepository.save(oauth2);
             }
