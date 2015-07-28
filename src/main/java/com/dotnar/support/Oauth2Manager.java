@@ -60,7 +60,14 @@ public class Oauth2Manager {
             return null;
 
         //检验是否可用
-        BaseResult result = SnsAPI.checkOauth2AccessToken(accessTokenMap.get(openid),openid);
+        BaseResult result = null;
+        try{
+
+            result = SnsAPI.checkOauth2AccessToken(accessTokenMap.get(openid),openid);
+        }catch (Exception e){
+            result = new BaseResult();
+            result.setErrmsg(e.getMessage());
+        }
 
         //accessToken可用时
         if(result.getErrmsg().equals("ok")){

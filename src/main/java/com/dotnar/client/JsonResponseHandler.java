@@ -18,7 +18,7 @@ public class JsonResponseHandler{
 	private static Map<String, ResponseHandler<?>> map = new HashMap<String, ResponseHandler<?>>();
 
 	@SuppressWarnings("unchecked")
-	public static <T> ResponseHandler<T> createResponseHandler(final Class<T> clazz){
+	public static <T> ResponseHandler<T> createResponseHandler(final Class<T> clazz) throws Exception{
 
 		if(map.containsKey(clazz.getName())){
 			return (ResponseHandler<T>)map.get(clazz.getName());
@@ -36,7 +36,7 @@ public class JsonResponseHandler{
 							try {
 								throw new WXPayException(str);
 							} catch (WXPayException e) {
-								e.printStackTrace();
+								System.out.println("==== 校验失败：" + e.getMessage() + " ====");
 							}
 						}
 						return JsonUtil.parseObject(new String(str.getBytes("iso-8859-1"),"utf-8"), clazz);

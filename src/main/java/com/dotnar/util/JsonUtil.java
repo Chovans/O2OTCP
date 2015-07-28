@@ -37,7 +37,7 @@ public class JsonUtil {
 
 			return true;
 		}catch (Exception e){
-			System.out.println("==== 无法获取error信息，抛出异常 ====");
+			System.out.println("==== 无法获取error信息，忽略 ====");
 			return false;
 		}
 

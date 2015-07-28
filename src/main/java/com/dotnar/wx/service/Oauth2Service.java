@@ -123,7 +123,7 @@ public class Oauth2Service {
             user.setUnionid(Oauth2Manager.getUnionId(user.getOpenid()));
             System.out.println("==== 获取用户信息：" + user + " ====");
 
-            if (StringUtils.isEmpty(user.getOpenid())) {
+            if (StringUtils.isEmpty(openid)) {
                 System.out.println("==== 更新授权ACCESS_TOKEN ====");
                 Oauth2 oauth2 = oauthRepository.findOne(openid);
                 oauth2.setAccess_token(accessToken);
