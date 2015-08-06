@@ -1,5 +1,7 @@
 package com.dotnar.wx.service;
 
+import com.dotnar.api.ShorturlAPI;
+import com.dotnar.bean.Shorturl;
 import com.dotnar.bean.js.JSInitialize;
 import com.dotnar.bean.js.JSInitializeResult;
 import com.dotnar.client.LocalHttpClient;
@@ -100,4 +102,36 @@ public class JSSDKConfigService {
         return JsonUtil.toJSONString(result);
 
     }
+
+
+    /**
+     * 长地址转短地址
+     * @param appid
+     * @param long_url
+     * @return
+     */
+    public static String shortUrl(String appid,String long_url){
+        Shorturl shorturl = null;
+        String access_token = TokenManager.getToken(appid);
+
+        if(StringUtils.isEmpty(access_token)){
+            return JsonUtil.toJSONString(new WXPayException("appid is error!"));
+        }
+
+        logger.info("transform url" + long_url);
+        System.out.println("transform url" + long_url);
+
+        try{
+            shorturl = ShorturlAPI.shorturl(access_token, long_url);
+        }catch (Exception e){
+            return JsonUtil.toJSONString(new WXPayException(e.getMessage()));
+        }
+
+        if(StringUtils.isEmpty(shorturl.getShort_url())){
+            return JsonUtil.toJSONString(new WXPayException("Unknow exception!"));
+        }
+
+        return JsonUtil.toJSONString(shorturl);
+    }
+
 }

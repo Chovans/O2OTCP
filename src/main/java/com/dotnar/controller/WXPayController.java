@@ -34,6 +34,7 @@ public class WXPayController implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+
         try {
             if (server == null) {
                 //Hprose
@@ -84,5 +85,6 @@ public class WXPayController implements InitializingBean {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

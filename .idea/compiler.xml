@@ -28,7 +28,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="O2OTCP3" target="1.8" />
       <module name="O2OTCP4" target="1.8" />
     </bytecodeTargetLevel>
   </component>
