@@ -24,7 +24,7 @@ public class WXPayNotifyController {
 
     public static HproseTcpClient client = new HproseTcpClient(WXPayConfigure.NOTIFY_TO_JS);
 
-    @RequestMapping("notify.do")
+    @RequestMapping("/notify.do")
     public static void notify(HttpServletRequest request,HttpServletResponse response) throws Exception {
         StringWriter writer = new StringWriter();
         IOUtils.copy(request.getInputStream(), writer, "UTF-8");

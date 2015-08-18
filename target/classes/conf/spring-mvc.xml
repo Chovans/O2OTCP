@@ -10,18 +10,19 @@
         http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.1.xsd">
 
     <!-- 自动扫描且只扫描@Controller-->
-    <!-- <context:component-scan base-package="com" use-default-filters="false">
+    <context:component-scan base-package="com" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-    </context:component-scan> -->
+    </context:component-scan>
 
     <!--<context:component-scan base-package="com"></context:component-scan>-->
     <mvc:annotation-driven/>
 
-    <mvc:default-servlet-handler/>
+    <!--<mvc:default-servlet-handler/>-->
     <!-- 静态资源映射 -->
-    <mvc:resources mapping="/js/**" location="/js" />
-    <mvc:resources mapping="/css/**" location="/js" />
-    <mvc:resources mapping="/images/**" location="/js" />
+    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/fonts/**" location="/fonts/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
 
         <!-- 定义首页-->
     <!--<mvc:view-controller path="/" view-name="redirect:/web/index.jsp" />-->

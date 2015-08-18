@@ -1,0 +1,4 @@
+2015-08-17 00:06:41,971-[HL] INFO localhost-startStop-2 org.springframework.web.context.support.XmlWebApplicationContext - Closing WebApplicationContext for namespace 'springServlet-servlet': startup date [Sun Aug 16 20:44:53 HKT 2015]; parent: Root WebApplicationContext
+2015-08-17 00:06:41,983-[HL] INFO localhost-startStop-2 org.springframework.web.context.support.XmlWebApplicationContext - Closing Root WebApplicationContext: startup date [Sun Aug 16 20:44:48 HKT 2015]; root of context hierarchy
+2015-08-17 00:06:41,985-[HL] INFO localhost-startStop-2 org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler - Shutting down ExecutorService 'defaultSockJsTaskScheduler'
+2015-08-17 00:06:41,987-[HL] INFO localhost-startStop-2 org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
