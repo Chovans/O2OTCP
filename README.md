@@ -1,6 +1,16 @@
 # O2OTCP
 点纳科技—微信后端
 
+
+==============模板部分=================
+
+访问地址：www.domain.com:7070 
+
+请求地址：www.domain.com:7070/getInfoByTemplateName/{templateName} 
+
+hook地址：www.domain.com:7070/projectName/{templateName} 
+
+
 ==============微信部分=================
 
 初始化客户端
