@@ -11,6 +11,34 @@
 hook地址：www.domain.com:7070/projectName/{templateName} 
 
 
+==============Mongo Support部分=========
+
+dbName:数据库名称
+documentName:Collection名称
+
+var client = hprose.Client.create('tcp://localhost:7074/', []); 
+
+//插入数据,jsonObj中需要含有_id
+
+insert(String dbName, String documentName, String jsonObj)
+
+findById(String dbName, String documentName, String id)
+
+//查找数据，jsonObj中包含搜索条件
+
+findOne(String dbName, String documentName, String jsonObj)
+
+findList(String dbName, String documentName, String num, String page)
+
+findAll(String dbName, String documentName)
+
+//jsonObj中有更新的数据，有则修改，没有则添加
+
+update(String dbName, String documentName, String id, String jsonObj)
+
+remove(String dbName, String documentName, String id)
+
+
 ==============微信部分=================
 
 初始化客户端
