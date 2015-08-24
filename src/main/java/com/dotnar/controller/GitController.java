@@ -64,6 +64,20 @@ public class GitController {
         return JsonUtil.toJSONString(baseResult);
     }
 
+
+    /**
+     * delete git repository
+     * @param gitUpdateRequest
+     * @return
+     */
+    @RequestMapping("/deleteGit.do")
+    @ResponseBody
+    public String deleteGit(@RequestBody GitUpdateRequest gitUpdateRequest){
+        BaseResult baseResult = new BaseResult();
+        baseResult.setErrmsg(gitService.deleteGitProject(gitUpdateRequest.getId(),null));
+        return JsonUtil.toJSONString(baseResult);
+    }
+
     /**
      * hook 更新
      * e.g: http://localhost/projectName/O2OTCP4

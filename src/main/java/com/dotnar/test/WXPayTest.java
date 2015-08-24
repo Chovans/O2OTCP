@@ -22,36 +22,42 @@ import java.util.regex.Pattern;
  */
 public class WXPayTest {
     public static void main(String[] args) throws Exception {
-//        final HproseTcpClient client = new HproseTcpClient(WXPayConfigure.WXPAY);
-//        try {
-//            String json = "{" +
-//                    "                'appid': 'wxcf74f930098faee1'," +
-//                    "                    'mch_id': '1233472902'," +
-//                    "                    'device_info': 'device_info'," +
-//                    "                    'body': 'test body'," +
-//                    "                    'detail': 'test detail'," +
-//                    "                    'attach': 'test attach'," +
-//                    "                    'out_trade_no': 'test-out-trade-no-1'," +
-//                    "                    'fee_type': ''," +
-//                    "                    'total_fee': '1'," +
-//                    "                    'spbill_create_ip': '127.0.0.0'," +
-//                    "                    'goods_tag': 'test-goods-tag'," +
-//                    "                    'trade_type': 'JSAPI'," +
-//                    "                    'product_id': 'test-product-id'," +
-//                    "                    'openid': 'o_QrEjjIkQ9URa1YnZ8gWi6G2AWs'" +
-//                    "            }";
-//            String key = "HXCU71nGNU5O4hvQlGSXEuMEMTWQs0HW";
+        final HproseTcpClient client = new HproseTcpClient(WXPayConfigure.WXPAY);
+        final HproseTcpClient client2 = new HproseTcpClient(WXPayConfigure.WXPAY);
+
+        try {
+            String json = "{" +
+                    "                'appid': 'wxcf74f930098faee1'," +
+                    "                    'mch_id': '1233472902'," +
+                    "                    'device_info': 'device_info'," +
+                    "                    'body': 'test body'," +
+                    "                    'detail': 'test detail'," +
+                    "                    'attach': 'test attach'," +
+                    "                    'out_trade_no': 'test-out-trade-no-1'," +
+                    "                    'fee_type': ''," +
+                    "                    'total_fee': '1'," +
+                    "                    'spbill_create_ip': '127.0.0.0'," +
+                    "                    'goods_tag': 'test-goods-tag'," +
+                    "                    'trade_type': 'JSAPI'," +
+                    "                    'product_id': 'test-product-id'," +
+                    "                    'openid': 'o_QrEjjIkQ9URa1YnZ8gWi6G2AWs'" +
+                    "            }";
+            String key = "HXCU71nGNU5O4hvQlGSXEuMEMTWQs0HW";
 //            Object object = client.invoke("payRequestJson", new Object[]{json,key});
-//            System.out.println(object);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+            Object object = client.invoke("getCheckCode",new Object[]{"7777"});
+            Thread.sleep(2000);
+            Object object22 = client.invoke("getCheckCode",new Object[]{"7777"});
+            Object object2 = client2.invoke("getCheckCode",new Object[]{"7777"});
+            System.out.println("success");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //        String url = "https://github.com/Chovans/O2OTCP.git";
 //        Pattern pattern = Pattern.compile("\\w*\\.git");
 //        Matcher matcher = pattern.matcher(url);
 //        System.out.println(url.replace(matcher.replaceAll(""),"").split("\\.")[0]);
-
+/*
         List<GitProject> gitProjects = new ArrayList<>();
         GitProject gitProject1 = new GitProject();
         gitProject1.setName("p1");
@@ -87,6 +93,7 @@ public class WXPayTest {
         JSONObject obj = JSON.parseObject(FileUtils.readFileToString(file));
 
         System.out.println(obj.toJSONString());
+        */
 
     }
 

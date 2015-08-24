@@ -240,6 +240,14 @@
             <artifactId>commons-beanutils</artifactId>
             <version>1.9.1</version>
         </dependency>
+
+        <!--mongodb-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.7.2.RELEASE</version>
+        </dependency>
+
         <!-- Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>

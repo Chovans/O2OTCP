@@ -48,6 +48,14 @@ angular.module("index.controller", [])
                 })
         };
 
+        $scope.deleteGit = function(id){
+            $http.post("/deleteGit.do",{id:id})
+                .success(function(data){
+                    if(data.errmsg == "success")
+                        $scope.loadData();
+                })
+        };
+
 
         $scope.loadData = function(){
 

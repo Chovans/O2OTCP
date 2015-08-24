@@ -18,7 +18,10 @@
     <context:property-placeholder ignore-unresolvable="true" local-override="true"
                                   location="classpath:conf/db.properties"/>
     <context:property-placeholder ignore-unresolvable="true" local-override="true"
-                                  location="classpath:conf/git.properties"/>
+                                  location="classpath:conf/shell.properties"/>
+    <context:property-placeholder location="classpath:conf/mongodb.properties" ignore-resource-not-found="true"
+                                  ignore-unresolvable="true" local-override="true"/>
+
     <!--aop listener-->
     <aop:aspectj-autoproxy expose-proxy="true"/>
     <!--auto ioc-->
@@ -73,4 +76,6 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
+
+
 </beans>

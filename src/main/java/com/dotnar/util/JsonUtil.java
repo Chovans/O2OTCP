@@ -31,13 +31,13 @@ public class JsonUtil {
 			String errormessage = jsonObject.getString("errmsg");
 
 			if(errorCode == 0 || errormessage.equals("ok")){
-				System.out.println("==== 检测错误信息可忽略 ====");
+				System.out.println("==== 见到到errorcode字段，但可以忽略 ====");
 				return false;
 			}
 
 			return true;
 		}catch (Exception e){
-			System.out.println("==== 无法获取error信息，忽略 ====");
+			System.out.println("==== 没有error信息 ====");
 			return false;
 		}
 

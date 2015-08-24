@@ -70,6 +70,9 @@ public class GitService {
             Matcher matcher = pattern.matcher(gitHttps);
             String projectName = (gitHttps.replace(matcher.replaceAll(""), "").split("\\.")[0]);
 
+            //clear git repository
+            deleteGitProject(null,projectName);
+
             //save in mysql,and add in memory,cause of check
             String id = saveGitProject(gitHttps, projectName);
             httpurl.add(gitHttps);
@@ -192,6 +195,27 @@ public class GitService {
 
         gitProjectRepository.save(gitProject);
 
+    }
+
+
+    /**
+     * delete git from server
+     * @param id
+     */
+    public String deleteGitProject(String id,String name){
+        String projectName = name == null?gitProjectRepository.findOne(id).getParentTemplateName():name;
+        try{
+            configBasePath();
+            String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "shell" + File.separator + "deleteGit.sh";
+            Process process = Runtime.getRuntime().exec("sh " + basePath + " " + baseGitRepository + " " + projectName);
+            if(id != null)
+                gitProjectRepository.delete(id);
+
+            return "success";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 
     /**

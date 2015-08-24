@@ -38,7 +38,7 @@
                     <button class="btn btn-default" ng-click="updateGit(git.id)" ng-if="git.state== 'done'">
                         更新
                     </button>
-                    <button class="btn btn-default">
+                    <button class="btn btn-default" ng-click="deleteGit(git.id)">
                         删除
                     </button>
                 </td>
