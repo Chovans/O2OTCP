@@ -24,9 +24,9 @@ public class MongoUtil {
     public static BasicDBObject transProperties(String jsonObj) {
         BasicDBObject basicDbObject = (BasicDBObject) JSON.parse(jsonObj);
 
-        //若有id，转换成id对象重新复制
-        if (basicDbObject.get("_id") != null)
-            basicDbObject.append("_id", new ObjectId(basicDbObject.get("_id").toString()));
+        //若有id，转换成id对象重新复制(暂用字符串)
+//        if (basicDbObject.get("_id") != null)
+//            basicDbObject.append("_id", new ObjectId(basicDbObject.get("_id").toString()));
 
         return basicDbObject;
     }

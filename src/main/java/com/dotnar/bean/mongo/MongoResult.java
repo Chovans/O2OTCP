@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class MongoResult implements Serializable{
     private String result="success";
     private String msg="ok";
-    private Object content;
+    private Object content=null;
 
     public String getResult() {
         return result;

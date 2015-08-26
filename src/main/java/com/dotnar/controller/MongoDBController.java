@@ -25,6 +25,7 @@ public class MongoDBController  implements InitializingBean {
                 server.add(MongoService.class,true);
                 server.setEnabledThreadPool(true);
                 server.start();
+                System.out.println("==== mongo support start ====");
             }
         } catch (Exception e) {
             e.printStackTrace();
