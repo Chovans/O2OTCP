@@ -1,5 +1,5 @@
-# O2OTCP
-点纳科技—微信后端
+
+#点纳科技—微信后端
 
 
 ==============模板部分=================
@@ -17,53 +17,61 @@ dbName:数据库名称
 documentName:Collection名称
 
 var client = hprose.Client.create('tcp://localhost:7074/', []); 
-
+```
 /**
-	插入数据,jsonObj中需要含有_id
+   	插入数据,jsonObj中需要含有_id
 **/
+```
+**insert(String dbName, String documentName, String jsonObj)**
 
-insert(String dbName, String documentName, String jsonObj)
-
+```
 /**
 	findById Id是字符串类型，不是ObjectId
 **/
-findById(String dbName, String documentName, String id)
+```
+**findById(String dbName, String documentName, String id)**
 
+```
 /**
 	查找数据，jsonObj中包含搜索条件，返回所有结果
 **/
-
+```
 findOne(String dbName, String documentName, String jsonObj)
 
+```
 /**
 	查找数据，jsonObj中包含搜索条件，返回分页结果
 **/
+```
+**findList(String dbName, String documentName, String pageNum, String pageSize,String jsonObj)**
 
-findList(String dbName, String documentName, String pageNum, String pageSize,String jsonObj)
-
+```
 /**
 	返回所有结果
 **/
+```
+**findAll(String dbName, String documentName)**
 
-findAll(String dbName, String documentName)
-
+```
 /**
 	jsonObj中有更新的数据，有则修改，没有则添加
 **/
+```
+**update(String dbName, String documentName, String id, String jsonObj)**
 
-update(String dbName, String documentName, String id, String jsonObj)
-
+```
 /**
 	根据id删除一条记录
 **/
+```
+**remove(String dbName, String documentName, String id)**
 
-remove(String dbName, String documentName, String id)
-
+```
 /**
 	返回所有的db和collections
 **/
-
-getDBAndCollection()
+```
+**getDBAndCollection()**
 
 ==============微信部分=================
 
