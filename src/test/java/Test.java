@@ -1,3 +1,4 @@
+import com.dotnar.mongo.service.MongoReflectService;
 import com.dotnar.mongo.service.MongoService;
 import com.dotnar.util.JsonUtil;
 import hprose.client.HproseTcpClient;
@@ -19,6 +20,9 @@ public class Test {
     @Autowired
     private MongoService mongoService;
 
+    @Autowired
+    private MongoReflectService mongoReflectService;
+
     @org.junit.Test
     public void mainTest(){
         String mongoResult = null;
@@ -27,7 +31,7 @@ public class Test {
 //        mongoResult = mongoService.findById("Gaubee_test_1","user","55dd8a460168e443d13aab1e");
 //        mongoResult = mongoService.findOne("Gaubee_test_1","user","{'_id':'55dd8a460168e443d13aab1e'}");
 //        mongoResult = mongoService.findOne("Gaubee_test_1","user","{'age':23}");
-//        mongoResult = mongoService.findList("Gaubee_test_1","user","1","30",null);
+//        mongoResult = mongoService.findList("Gaubee_test_1","user","1","30",null,"{'name':1}");
 //        mongoResult = mongoService.update("test1","test","55d80f32016868315397cd6f","{'email':'5@','name':'jijuyuan','user':'guest'}");
 //        mongoResult = mongoService.remove("test1","test","55d8436101687c99f48244c5");
 //        mongoResult = mongoService.createCollection("test112","ji");
@@ -38,6 +42,8 @@ public class Test {
 //        mongoService.createDB("jijuyuan");
 //        mongoResult = mongoService.createCollection("test1","chovans");
 //        mongoResult = mongoService.getDBAndCollection();
+
+        mongoResult = mongoReflectService.reflectMethod("findAll", "[['Gaubee_test_1','user']]");
         System.out.println(mongoResult);
     }
 

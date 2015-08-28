@@ -2,6 +2,7 @@ package com.dotnar.controller;
 
 import com.dotnar.contant.TCPConfig;
 import com.dotnar.filter.MongoFilter;
+import com.dotnar.mongo.service.MongoReflectService;
 import com.dotnar.mongo.service.MongoService;
 import hprose.server.HproseTcpServer;
 import org.springframework.beans.factory.InitializingBean;
@@ -23,6 +24,7 @@ public class MongoDBController  implements InitializingBean {
                 //Hprose
                 server = new HproseTcpServer(TCPConfig.MONGODBTCP);
                 server.add(MongoService.class,true);
+                server.add(MongoReflectService.class,true);
                 server.setEnabledThreadPool(true);
                 server.start();
                 System.out.println("==== mongo support start ====");

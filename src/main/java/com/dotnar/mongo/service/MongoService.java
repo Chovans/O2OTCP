@@ -1,18 +1,19 @@
 package com.dotnar.mongo.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.dotnar.bean.mongo.MongoCollections;
 import com.dotnar.bean.mongo.MongoResult;
 import com.dotnar.util.JsonUtil;
 import com.dotnar.util.MongoUtil;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import com.mongodb.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -92,6 +93,11 @@ public class MongoService {
         }
 
         try {
+
+            if(StringUtils.isEmpty(id)){
+                throw new Exception("id is null");
+            }
+
             mongoResult.setContent(mongo.getDB(dbName).getCollection(documentName).findOne(id));
 
             logger.info("==== (" + sdf.format(System.currentTimeMillis()) + ")" + dbName + "." + documentName + " ====");
@@ -146,9 +152,10 @@ public class MongoService {
      * @param num
      * @param page
      * @param jsonObj
+     * @param sortBy
      * @return
      */
-    public static String findList(String dbName, String documentName, String num, String page, String jsonObj) {
+    public static String findList(String dbName, String documentName, String num, String page, String jsonObj,String sortBy) {
         MongoResult mongoResult = new MongoResult();
         DBCursor cursor = null;
 
@@ -164,11 +171,15 @@ public class MongoService {
             Integer pageSize = Integer.parseInt(page);
             Integer skipNum = (pageNum - 1) * pageSize;
             BasicDBObject basicDBObject = new BasicDBObject();
+            BasicDBObject sortDBObject = new BasicDBObject();
 
             if (!StringUtils.isEmpty(jsonObj))
                 basicDBObject = MongoUtil.transProperties(jsonObj);
 
-            cursor = mongo.getDB(dbName).getCollection(documentName).find(basicDBObject).skip(skipNum).limit(pageSize);
+            if(!StringUtils.isEmpty(sortBy))
+                sortDBObject = MongoUtil.transProperties(sortBy);
+
+            cursor = mongo.getDB(dbName).getCollection(documentName).find(basicDBObject).sort(sortDBObject).skip(skipNum).limit(pageSize);
             List<DBObject> objs = new ArrayList<>();
             while (cursor.hasNext()) {
                 objs.add(cursor.next());
@@ -198,7 +209,10 @@ public class MongoService {
      */
     public static String findAll(String dbName, String documentName) {
         logger.info("Mongo.findAll");
-        return findList(dbName, documentName, "1", String.valueOf(Integer.MAX_VALUE), null);
+
+
+        return findList(dbName, documentName, "1", String.valueOf(Integer.MAX_VALUE), null, null);
+
     }
 
 
