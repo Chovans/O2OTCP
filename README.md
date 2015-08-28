@@ -57,6 +57,11 @@ jsonObj中有更新的数据，有则修改，没有则添加
 ```
 **getDBAndCollection()**
 
+```
+批处理方式
+```
+**reflectMethod(String funcName,String jsonObj)**
+
 ==============微信部分=================
 
 初始化客户端
