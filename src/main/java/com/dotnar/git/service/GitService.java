@@ -1,15 +1,12 @@
 package com.dotnar.git.service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.dotnar.bean.git.GitConfigRequest;
 import com.dotnar.bean.git.GitInfoResponse;
 import com.dotnar.bean.git.GitProject;
 import com.dotnar.dao.GitProjectRepository;
 import com.dotnar.enums.GitProjectState;
 import com.dotnar.util.GitUtil;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,21 +67,24 @@ public class GitService {
             Matcher matcher = pattern.matcher(gitHttps);
             String projectName = (gitHttps.replace(matcher.replaceAll(""), "").split("\\.")[0]);
 
+            //检测出用户名
+            String userName = gitHttps.split("/")[gitHttps.split("/").length-2];
+
             //clear git repository
-            deleteGitProject(null,projectName);
+            deleteGitProject(null,userName,projectName);
 
             //save in mysql,and add in memory,cause of check
-            String id = saveGitProject(gitHttps, projectName);
+            String id = saveGitProject(gitHttps,userName, projectName);
             httpurl.add(gitHttps);
 
-            System.out.println("正在Clone....");
+            System.out.println("==== 正在Clone("+userName +"  "+ projectName+") ====");
 
             //pull project from url
             String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "shell" + File.separator + "buildGit.sh";
-            process = Runtime.getRuntime().exec("sh " + basePath + " " + baseGitRepository + " " + gitHttps + " " + projectName);
+            process = Runtime.getRuntime().exec("sh " + basePath + " " + baseGitRepository + " " + userName + " " + gitHttps + " " + projectName);
             process.waitFor();
 
-            System.out.println("Clone完成....");
+            System.out.println("==== Clone完成.... ====");
 
             //clear from memory,cause of check
             httpurl.remove(gitHttps);
@@ -154,12 +154,14 @@ public class GitService {
      * 保存git项目
      *
      * @param url
-     * @param name
+     * @param userName
+     * @param projectName
      * @return
      */
-    public String saveGitProject(String url, String name) {
+    public String saveGitProject(String url, String userName ,String projectName) {
         GitProject gitProject = new GitProject();
-        gitProject.setName(name);
+        gitProject.setName(projectName);
+        gitProject.setUserName(userName);
         gitProject.setState(GitProjectState.downing.name());
         gitProject.setUrl(url);
         gitProject.setCreateOn(new Date());
@@ -173,16 +175,16 @@ public class GitService {
      *
      * @param id
      */
-    public void updateGitProject(String id, String projectName) {
+    public GitProject updateGitProject(String id, String projectName) {
         GitProject gitProject = gitProjectRepository.findOne(id);
         gitProject.setUpdateOn(new Date());
         gitProject.setState(GitProjectState.done.name());
         //若传入项目名，则尝试读取json内容
         if (!org.springframework.util.StringUtils.isEmpty(projectName)) {
             try {
-                File file = new File(baseGitRepository + File.separator + projectName + File.separator + "package.json");
+                File file = new File(baseGitRepository + File.separator +gitProject.getUserName() + File.separator + projectName + File.separator + "package.json");
                 //读取package.json文件正常的情况下，以字符串的形式读取其中内容
-                if (file.exists() && file.isFile()) {
+                if (file.exists() && !file.isDirectory()) {
                     String json = FileUtils.readFileToString(file);
                     JSONObject jsonObject = JSONObject.parseObject(json);
                     gitProject.setParentTemplateName(jsonObject.getString("parent_template_name"));
@@ -192,8 +194,9 @@ public class GitService {
                 e.printStackTrace();
             }
         }
-
         gitProjectRepository.save(gitProject);
+
+        return gitProject;
 
     }
 
@@ -202,12 +205,13 @@ public class GitService {
      * delete git from server
      * @param id
      */
-    public String deleteGitProject(String id,String name){
-        String projectName = name == null?gitProjectRepository.findOne(id).getParentTemplateName():name;
+    public String deleteGitProject(String id,String userName, String projectName){
+        projectName = projectName == null?gitProjectRepository.findOne(id).getName():projectName;
+        userName = userName == null? gitProjectRepository.findOne(id).getUserName():userName;
         try{
             configBasePath();
             String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "shell" + File.separator + "deleteGit.sh";
-            Process process = Runtime.getRuntime().exec("sh " + basePath + " " + baseGitRepository + " " + projectName);
+            Process process = Runtime.getRuntime().exec("sh " + basePath + " " + baseGitRepository+File.separator+userName + " " + projectName);
             if(id != null)
                 gitProjectRepository.delete(id);
 
@@ -252,21 +256,16 @@ public class GitService {
             gitProjectRepository.save(gitProject);
             String projectName = gitProject.getName();
 
-            System.out.println("pulling....");
 
             //update git,use order: git pull
             String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "shell" + File.separator + "updateGit.sh";
-            process = Runtime.getRuntime().exec("sh " + basePath + " " + baseGitRepository + " " + projectName);
+            process = Runtime.getRuntime().exec("sh " + basePath + " " + baseGitRepository + File.separator + gitProject.getUserName() + File.separator + projectName);
             process.waitFor();
 
-            updateGitProject(id,gitProject.getName());
+            gitProject = updateGitProject(id, gitProject.getName());
 
             gitProject.setState(GitProjectState.done.name());
             gitProjectRepository.save(gitProject);
-
-            System.out.println("pull done");
-            System.out.println(GitUtil.getShellResult(process.getInputStream()));
-            System.out.println(GitUtil.getShellResult(process.getErrorStream()));
 
             return "success";
 
@@ -294,12 +293,19 @@ public class GitService {
 
     /**
      * get packageInformation,repositoryPath and other extend relative
-     * @param name
+     * @param userName
+     * @param templateName
      * @return
      */
-    public GitInfoResponse getInfoByName(String name){
+    public GitInfoResponse getInfoByName(String userName,String templateName){
         GitInfoResponse gitInfoResponse = new GitInfoResponse();
-        List<GitProject> projects = gitProjectRepository.findByName(name);
+
+        List<GitProject> projects ;
+        if(userName == null)
+            projects = gitProjectRepository.findByName(templateName);
+        else
+            projects = gitProjectRepository.findByUserNameAndName(userName, templateName);
+
         if(projects.size() == 0)
             return gitInfoResponse;
 
@@ -315,9 +321,10 @@ public class GitService {
         GitProject gitProject = projects.get(0);
         gitInfoResponse.set_package(gitProject.get_package());
         gitInfoResponse.setPath(baseGitRepository + File.separator + gitProject.getName() + File.separator);
-        gitInfoResponse.setTemplateName(name);
+        gitInfoResponse.setTemplateName(templateName);
         gitInfoResponse.set_package(gitProject.get_package());
-        gitInfoResponse.setRelation(GitUtil.sortRelations((List<GitProject>) gitProjectRepository.findAll(),gitProject));
+        gitInfoResponse.setRelation(GitUtil.sortRelations((List<GitProject>) gitProjectRepository.findAll(), gitProject));
+        gitInfoResponse.setRelationPaths(GitUtil.sortRelationsPath(baseGitRepository+File.separator,gitInfoResponse.getRelation()));
 
         return gitInfoResponse;
     }

@@ -14,4 +14,5 @@ import java.util.List;
 public interface GitProjectRepository extends CrudRepository<GitProject,String>{
     public List<GitProject> findByUrl(String url);
     public List<GitProject> findByName(String name);
+    public List<GitProject> findByUserNameAndName(String userName,String name);
 }

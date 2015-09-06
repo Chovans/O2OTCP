@@ -25,6 +25,7 @@ public class GitProject {
     private String state;
     @Column(columnDefinition = "TEXT")
     private String _package;
+    private String userName;
     private String parentTemplateName;
 
     public String getId() {
@@ -89,5 +90,13 @@ public class GitProject {
 
     public void set_package(String _package) {
         this._package = _package;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

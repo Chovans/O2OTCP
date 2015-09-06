@@ -8,5 +8,7 @@ public class TCPConfig {
     public static final String COMMONTCP = "tcp://0.0.0.0:7072";
     //mongodb
     public static final String MONGODBTCP="tcp://0.0.0.0:7074";
+    //银行接口
+    public static final String BANKTCP="tcp://0.0.0.0:7075";
 
 }

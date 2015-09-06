@@ -74,7 +74,7 @@ public class GitController {
     @ResponseBody
     public String deleteGit(@RequestBody GitUpdateRequest gitUpdateRequest){
         BaseResult baseResult = new BaseResult();
-        baseResult.setErrmsg(gitService.deleteGitProject(gitUpdateRequest.getId(),null));
+        baseResult.setErrmsg(gitService.deleteGitProject(gitUpdateRequest.getId(), null, null));
         return JsonUtil.toJSONString(baseResult);
     }
 
@@ -99,7 +99,20 @@ public class GitController {
     @RequestMapping(value = "/getInfoByTemplateName/{projectName}",produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public String getInfoByName(@PathVariable String projectName){
-        GitInfoResponse gitInfoResponse = gitService.getInfoByName(projectName);
+        GitInfoResponse gitInfoResponse = gitService.getInfoByName(null,projectName);
+        return JsonUtil.toJSONString(gitInfoResponse);
+    }
+
+    /**
+     * 新版本查询API
+     * @param userName
+     * @param projectName
+     * @return
+     */
+    @RequestMapping(value = "/getInfoByTemplateName/{userName}/{projectName}",produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String getInfoByUserAndTemplateName(@PathVariable String userName,@PathVariable String projectName){
+        GitInfoResponse gitInfoResponse = gitService.getInfoByName(userName,projectName);
         return JsonUtil.toJSONString(gitInfoResponse);
     }
 }

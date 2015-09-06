@@ -29,6 +29,7 @@ public class BackupService {
 
     /**
      * 定时备份 单位：ms
+     * 3小时备份一次
      */
     @Scheduled(fixedRate = 10800000)
     public void backup() {
@@ -46,6 +47,7 @@ public class BackupService {
 
     /**
      * 定时清除
+     * 每天凌晨2点清除一次
      */
     @Scheduled(cron = "0 0 2 * * ?")
     public void clearTimeoutBackup() {

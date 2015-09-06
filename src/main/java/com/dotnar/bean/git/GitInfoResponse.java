@@ -7,6 +7,7 @@ public class GitInfoResponse {
     private String templateName = "";
     private String _package = "";
     private String path = "";
+    private String[]  relationPaths = {};
     private String[] relation = {};
 
     public String getTemplateName() {
@@ -39,5 +40,13 @@ public class GitInfoResponse {
 
     public void setRelation(String[] relation) {
         this.relation = relation;
+    }
+
+    public String[] getRelationPaths() {
+        return relationPaths;
+    }
+
+    public void setRelationPaths(String[] relationPaths) {
+        this.relationPaths = relationPaths;
     }
 }

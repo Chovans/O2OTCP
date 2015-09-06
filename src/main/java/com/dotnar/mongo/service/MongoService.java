@@ -1,19 +1,18 @@
 package com.dotnar.mongo.service;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.dotnar.bean.mongo.MongoCollections;
 import com.dotnar.bean.mongo.MongoResult;
 import com.dotnar.util.JsonUtil;
 import com.dotnar.util.MongoUtil;
-import com.mongodb.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.Mongo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -173,9 +172,11 @@ public class MongoService {
             BasicDBObject basicDBObject = new BasicDBObject();
             BasicDBObject sortDBObject = new BasicDBObject();
 
+            //检测搜索条件
             if (!StringUtils.isEmpty(jsonObj))
                 basicDBObject = MongoUtil.transProperties(jsonObj);
 
+            //检测排序条件
             if(!StringUtils.isEmpty(sortBy))
                 sortDBObject = MongoUtil.transProperties(sortBy);
 
@@ -209,8 +210,6 @@ public class MongoService {
      */
     public static String findAll(String dbName, String documentName) {
         logger.info("Mongo.findAll");
-
-
         return findList(dbName, documentName, "1", String.valueOf(Integer.MAX_VALUE), null, null);
 
     }
@@ -428,8 +427,8 @@ public class MongoService {
             }
 
         } else {
-            System.out.println("mo db " + documentName);
-            logger.error("mo db " + documentName);
+            System.out.println("no db " + documentName);
+            logger.error("no db " + documentName);
             return "no db " + dbName;
         }
         return null;

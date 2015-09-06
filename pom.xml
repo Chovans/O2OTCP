@@ -27,6 +27,7 @@
 
     <dependencies>
         <!--第三方类库-->
+        <!--云通讯短信-->
         <dependency>
             <groupId>CCP_REST_SMS_SDK_JAVA_v2.6.3r</groupId>
             <artifactId>CCP_REST_SMS_SDK_JAVA_v2.6.3r</artifactId>
@@ -34,6 +35,7 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/web/WEB-INF/lib/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar</systemPath>
         </dependency>
+        <!--hprose服务间通讯-->
         <dependency>
             <groupId>hprose_for_java_7</groupId>
             <artifactId>hprose_for_java_7</artifactId>
@@ -41,12 +43,21 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/web/WEB-INF/lib/hprose_for_java_7.jar</systemPath>
         </dependency>
+        <!--验证码支持包-->
         <dependency>
             <groupId>patchca-0.5.0</groupId>
             <artifactId>patchca-0.5.0</artifactId>
             <version>1.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/web/WEB-INF/lib/patchca-0.5.0.jar</systemPath>
+        </dependency>
+        <!--招商银行支付java包-->
+        <dependency>
+            <groupId>cmbJava</groupId>
+            <artifactId>cmbJava</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/web/WEB-INF/lib/cmbJava.jar</systemPath>
         </dependency>
 
         <!-- spring核心包 -->

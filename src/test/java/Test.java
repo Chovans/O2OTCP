@@ -1,13 +1,12 @@
 import com.dotnar.mongo.service.MongoReflectService;
 import com.dotnar.mongo.service.MongoService;
-import com.dotnar.util.JsonUtil;
-import hprose.client.HproseTcpClient;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author chovans on 15/8/22.
@@ -50,14 +49,27 @@ public class Test {
     @org.junit.Test
     public void HproseTest(){
         try{
-            HproseTcpClient client = new HproseTcpClient("121.40.72.93:7074");
+//            HproseTcpClient client = new HproseTcpClient("121.40.72.93:7074");
 //            Object string = client.invoke("insert", new Object[]{"test2", "doc", "{'id':'55d80f32016868315397cd6f','name':'chovans','email':'4@','phone':'18759718701'}"});
-            System.out.println(client);
+//            System.out.println(client);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    @org.junit.Test
+    public void matchTest(){
+
+
+    }
+
+    public static void main(String[] args){
+        String url = "https://git.oschina.net/xuezi/pc_base_version.git";
+
+//        Pattern pattern = Pattern.compile("/[0-9a-zA-Z]+/");
+
+        System.out.println(Pattern.matches("/[0-9a-zA-Z]+/",url));
+    }
 
 
 }
