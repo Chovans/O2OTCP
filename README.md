@@ -8,8 +8,11 @@
 
 请求地址：www.domain.com:7070/getInfoByTemplateName/{templateName} 
 
+请求地址(新版)：www.domain.com:7070/getInfoByTemplateName/{userName}/{templateName} 
+
 hook地址：www.domain.com:7070/projectName/{templateName} 
 
+hook地址(新版): www.domain.com:7070/projectName/{templateName}/userName/{userName}
 
 ==============Mongo Support部分=========
 
@@ -206,4 +209,6 @@ jsonObj中有更新的数据，有则修改，没有则添加
      * @return 服务商返回的json字符串
      */
      
-     test
+=================配置=====================
+
+mysql,mongodb,git目录(读写权限)
