@@ -73,7 +73,6 @@ public class UnifiedorderService {
             unifiedorder.setTime_expire(sdf.format(new Date().getTime() + (1000 * 60 * WXPayConfigure.EFFECTIVE_TIME)));
             unifiedorder.setNotify_url(WXPayConfigure.NOTIFY_URL);
 
-            System.out.println("====接受预支付订单请求：" + unifiedorder + new Date());
             logger.info("====接受预支付订单请求：" + unifiedorder);
 
             //记录一个UnifiedorderKey，key信息
@@ -114,7 +113,6 @@ public class UnifiedorderService {
     public static UnifiedorderKey payRequestResultJson(String xmlString,
                                                        HttpServletResponse response) throws Exception {
 
-        System.out.println("==== 收到微信回调：" + xmlString);
         logger.info("==== 收到微信回调：" + xmlString);
         //获取请求数据
         MchPayNotify payNotify = XMLConverUtil.convertToObject(MchPayNotify.class, xmlString);
@@ -125,27 +123,25 @@ public class UnifiedorderService {
             return null;
         }
         //获取key
-        System.out.println("==== 收到的out_trade_no:" + payNotify.getOut_trade_no());
+        logger.info("==== 收到的out_trade_no:" + payNotify.getOut_trade_no());
 
         UnifiedorderKey unifiedorderKey = null;
         try {
             unifiedorderKey = unifiedorderKeyRepository.findByOutTradeNo(payNotify.getOut_trade_no());
-            System.out.println("==== 搜索出的对象：" + unifiedorderKey +" ====");
+            logger.info("==== 搜索出的对象：" + unifiedorderKey + " ====");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
 
         if(unifiedorderKey.get_key() == null){
-            System.out.println("==== 数据库中搜索不到记录  ====");
+            logger.info("==== 数据库中搜索不到记录  ====");
             return null;
         }
 
-        System.out.println("==== 验证签名 ====");
         logger.info("==== 验证签名 ====");
         //签名验证
         if (SignatureUtil.validateAppSignature(payNotify, unifiedorderKey.get_key())) {
-            System.out.println("==== 验证签名成功 ====");
             logger.info("==== 验证签名成功 ====");
             expireSet.add(payNotify.getTransaction_id());
             MchNotifyXml baseResult = new MchNotifyXml();
@@ -163,7 +159,6 @@ public class UnifiedorderService {
             }
             return unifiedorderKey;
         } else {
-            System.out.println("==== 验证签名失败 ====");
             logger.info("==== 验证签名失败 ====");
             MchNotifyXml baseResult = new MchNotifyXml();
             baseResult.setReturn_code("FAIL");

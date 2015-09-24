@@ -8,6 +8,8 @@ import com.dotnar.enums.GitProjectState;
 import com.dotnar.util.GitUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,8 @@ import java.util.regex.Pattern;
  */
 @Service
 public class GitService {
+
+    private static Logger logger = LoggerFactory.getLogger(GitService.class);
 
     private String baseGitRepository = null;
     private List<String> httpurl = new ArrayList<String>();
@@ -77,14 +81,14 @@ public class GitService {
             String id = saveGitProject(gitHttps,userName, projectName);
             httpurl.add(gitHttps);
 
-            System.out.println("==== 正在Clone("+userName +"  "+ projectName+") ====");
+            logger.info("==== 正在Clone(" + userName + "  " + projectName + ") ====");
 
             //pull project from url
             String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "shell" + File.separator + "buildGit.sh";
             process = Runtime.getRuntime().exec("sh " + basePath + " " + baseGitRepository + " " + userName + " " + gitHttps + " " + projectName);
             process.waitFor();
 
-            System.out.println("==== Clone完成.... ====");
+            logger.info("==== Clone完成.... ====");
 
             //clear from memory,cause of check
             httpurl.remove(gitHttps);
@@ -94,17 +98,17 @@ public class GitService {
             String msg = GitUtil.getShellResult(process.getErrorStream());
             if (!StringUtils.isEmpty(msg) && msg.indexOf("fatal") > 0) {
                 process.destroy();
-                System.err.println(msg);
+                logger.error(msg);
                 return msg;
             } else {
-                System.out.println(GitUtil.getShellResult(process.getInputStream()));
+                logger.info(GitUtil.getShellResult(process.getInputStream()));
                 updateGitProject(id, projectName);
                 process.destroy();
                 return "success";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.print(e.getMessage());
+            logger.error(e.getMessage());
             return e.getMessage();
         }
     }
@@ -139,7 +143,7 @@ public class GitService {
     public String checkIsVaild(String url) {
         //1.是否正在进行
         if (httpurl.indexOf(url) > -1) {
-            System.err.println("地址：" + url + " 正在进行。。。");
+            logger.error("地址：" + url + " 正在进行。。。");
             return "正在Clone中...";
         }
         //2.是否已完成过
@@ -290,6 +294,17 @@ public class GitService {
         List<GitProject> projects = gitProjectRepository.findByName(projectName);
         return updateGitProject(projects.size()>0?projects.get(0).getId():null);
     }
+
+    /**
+     * git hook address
+     * @param projectName
+     * @return
+     */
+    public String hookGitV2(String projectName,String userName){
+        List<GitProject> projects = gitProjectRepository.findByUserNameAndName(userName,projectName);
+        return updateGitProject(projects.size()>0?projects.get(0).getId():null);
+    }
+
 
     /**
      * get packageInformation,repositoryPath and other extend relative

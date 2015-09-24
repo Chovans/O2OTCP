@@ -1,6 +1,7 @@
 package com.dotnar.api;
 
 import com.dotnar.bean.BaseResult;
+import com.dotnar.util.JsonUtil;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import com.dotnar.bean.SnsToken;
@@ -183,6 +184,7 @@ public class SnsAPI extends BaseAPI{
 				.addParameter("grant_type", "refresh_token")
 				.addParameter("refresh_token", refreshToken)
 				.build();
+		System.out.println(JsonUtil.toJSONString(httpUriRequest));
 		return LocalHttpClient.executeJsonResult(httpUriRequest,SnsToken.class);
 	}
 }

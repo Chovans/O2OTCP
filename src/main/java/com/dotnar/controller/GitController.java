@@ -91,6 +91,19 @@ public class GitController {
     }
 
     /**
+     * hook 更新(新版本)
+     * e.g: http://localhost/projectName/O2OTCP4/userName/Chovans
+     * @param projectName
+     */
+    @RequestMapping(value = "/projectName/{projectName}/userName/{userName}",produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String hookGit(@PathVariable String projectName,@PathVariable String userName){
+        BaseResult baseResult = new BaseResult();
+        baseResult.setErrmsg(gitService.hookGitV2(projectName,userName));
+        return JsonUtil.toJSONString(baseResult);
+    }
+
+    /**
      * 通过提供RESTful查询API，可以通过模板名获取到指定的package信息以及仓库所在的文件夹目录
      Package里面有会有一个dotnar.parent_template_name字段来实现继承功能，所以需要提供API获取文件夹目录数组（继承链）
      * @param projectName

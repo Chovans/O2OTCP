@@ -7,6 +7,8 @@ import com.dotnar.bean.mongo.MongoResult;
 import org.bson.types.ObjectId;
 import org.springframework.util.*;
 
+import java.util.Date;
+
 public class JsonUtil {
 
     private JsonUtil() {
@@ -17,7 +19,7 @@ public class JsonUtil {
     }
 
     public static String toJSONString(Object object) {
-
+        System.out.println("==== json("+new Date()+"):" + JSON.toJSONString(object) + "====");
         return JSON.toJSONString(object);
     }
 

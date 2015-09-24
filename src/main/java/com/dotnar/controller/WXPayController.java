@@ -81,7 +81,7 @@ public class WXPayController implements InitializingBean {
                 long end = System.currentTimeMillis();
                 System.out.println("===== 获取token和ticket共耗时："+(end-begin)+"毫秒 ====");
                 System.out.println("===== token=" + TokenManager.getToken(WXPayConfigure.DEFAULT_APPID) + " ====");
-                System.out.println("===== ticket="+ TicketManager.getTicket(WXPayConfigure.DEFAULT_APPID)+" ====");System.out.println("===== 获取token和ticket共耗时："+(end-begin)+"毫秒 ====");
+                System.out.println("===== ticket="+ TicketManager.getTicket(WXPayConfigure.DEFAULT_APPID)+" ====");
                 logger.info("===== 获取token和ticket共耗时：" + (end - begin) + "毫秒 ====");
                 logger.info("===== token=" + TokenManager.getToken(WXPayConfigure.DEFAULT_APPID) + " ====");
                 logger.info("===== ticket="+ TicketManager.getTicket(WXPayConfigure.DEFAULT_APPID) + " ====");
