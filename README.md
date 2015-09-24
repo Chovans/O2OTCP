@@ -8,10 +8,11 @@
 
 请求地址：www.domain.com:7070/getInfoByTemplateName/{templateName} 
 
-请求地址（2015-9-6）：www.domain.com:7070/getInfoByTemplateName/{userName}/{templateName} 
+请求地址(新版)：www.domain.com:7070/getInfoByTemplateName/{userName}/{templateName} 
 
 hook地址：www.domain.com:7070/projectName/{templateName} 
 
+hook地址(新版): www.domain.com:7070/projectName/{templateName}/userName/{userName}
 
 ==============Mongo Support部分=========
 
